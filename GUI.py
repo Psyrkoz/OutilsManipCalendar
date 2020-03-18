@@ -1,4 +1,4 @@
-from tkinter import Tk, Label, Button, Entry, ttk, LEFT, X, BOTTOM, TOP, END
+from tkinter import Tk, Label, Button, Entry, ttk, LEFT, X, BOTTOM, TOP, END, OptionMenu, StringVar
 from tkinter.filedialog import askopenfilename
 from connexion import GoogleConnexion
 from DateEntry import DateEntry
@@ -31,17 +31,37 @@ class GUI:
         self.window.mainloop()
     
     def createGUIApplication(self):
+        GoogleConnexion.displayEvents(self.service)
         # Cree la fenêtre
         self.window = Tk()
         self.window.resizable(width=False, height=False)
         self.window.title("Outils Manipulation calendrier Google")
+
+        self.creeListeCalendrier()
         self.tabs = ttk.Notebook(self.window)
         self.creeTabAjout()
         self.creeTabExport()
         
         self.tabs.pack(expand=1, fill='both')
         self.window.mainloop()
-    
+
+    def creeListeCalendrier(self):
+        variable = StringVar(self.window)
+
+        listeCalendriers = self.service.calendarList().list().execute()
+        self.nomEtIdCalendriers = dict()
+        for c in listeCalendriers['items']:
+            if c['summary'] not in ['Contacts', 'Jours fériés en France', 'Week Numbers']:
+                self.nomEtIdCalendriers[c['summary']] = c['id']
+
+        self.calendarsList = OptionMenu(self.window, variable, *(self.nomEtIdCalendriers.keys()), command = self.setSelectedID)
+
+        self.calendarsList.pack(expand=True, fill=X)
+
+    def setSelectedID(self, val):
+        self.selectedID = self.nomEtIdCalendriers[val]
+        print(val + ": " + self.selectedID)
+
     def creeTabExport(self):
         self.tabExport = ttk.Frame(self.tabs)
 
