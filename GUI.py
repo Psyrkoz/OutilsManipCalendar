@@ -1,6 +1,7 @@
 from tkinter import Tk, Label, Button, Entry, ttk, LEFT, X, BOTTOM, TOP, END
 from tkinter.filedialog import askopenfilename
 from connexion import GoogleConnexion
+from DateEntry import DateEntry
 
 class GUI:
     def __init__(self):
@@ -37,16 +38,31 @@ class GUI:
         self.tabs = ttk.Notebook(self.window)
         self.creeTabAjout()
         self.creeTabExport()
-
-        # Ajoute les éléments dans la fenêtre et lance la boucle
-        self.tabs.add(self.tabAdd, text="Ajout")
-        self.tabs.add(self.tabExport, text="Exportation")
+        
         self.tabs.pack(expand=1, fill='both')
         self.window.mainloop()
     
     def creeTabExport(self):
         self.tabExport = ttk.Frame(self.tabs)
-        # TODO: Crée la tab d'exportation
+
+        # Date
+        self.lineDate = ttk.Frame(self.tabExport)
+        self.dateDebut = Label(self.lineDate, text = "Date début")
+        self.dateDebutEntry = DateEntry(self.lineDate)
+        self.dateFin = Label(self.lineDate, text = "Date fin")
+        self.dateFinEntry = DateEntry(self.lineDate)
+        self.dateDebut.pack(side=LEFT)
+        self.dateDebutEntry.pack(side=LEFT)
+        self.dateFin.pack(side=LEFT)
+        self.dateFinEntry.pack(side=LEFT)
+
+        #Bouton
+        self.buttonExport = Button(self.tabExport, text = "Exporter données")
+
+        self.lineDate.pack()
+        self.buttonExport.pack(expand=True, fill=X)
+        self.tabs.add(self.tabExport, text="Exportation")
+        
 
     def creeTabAjout(self):
         self.tabAdd = ttk.Frame(self.tabs)
@@ -63,6 +79,7 @@ class GUI:
 
         self.entryLine.pack()
         self.buttonAjouter.pack(expand=True, fill=X)
+        self.tabs.add(self.tabAdd, text="Ajout")
 
 
     def askForICSFile(self):
