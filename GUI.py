@@ -1,5 +1,5 @@
 from tkinter import Tk, Label, Button, Entry, ttk, LEFT, X, BOTTOM, TOP, END, OptionMenu, StringVar
-from tkinter.filedialog import askopenfilename
+from tkinter.filedialog import askopenfilename, asksaveasfilename
 from connexion import GoogleConnexion
 from DateEntry import DateEntry
 
@@ -79,10 +79,24 @@ class GUI:
         #Bouton
         self.buttonExport = Button(self.tabExport, text = "Exporter données")
 
+        # Fichier
+        self.lineFile = ttk.Frame(self.tabExport)
+        self.filenameExportLabel = Label(self.lineFile, text = "Nom du fichier")
+        self.filenameExport = Entry(self.lineFile)
+        self.selectFilenameAndFolderButton = Button(self.lineFile, text = "...", command = self.selectSaveFolderAndName)
+        self.filenameExportLabel.pack(side=LEFT)
+        self.filenameExport.pack(expand=True, fill=X, side=LEFT)
+        self.selectFilenameAndFolderButton.pack(side=LEFT)
+
         self.lineDate.pack()
-        self.buttonExport.pack(expand=True, fill=X)
+        self.lineFile.pack(expand=True, fill=X)
+        self.buttonExport.pack(expand=True, fill=X)  
         self.tabs.add(self.tabExport, text="Exportation")
         
+    def selectSaveFolderAndName(self):
+        filename = asksaveasfilename(title="Selectionner un fichier ICS", filetypes=(("iCalendar File", "*.ics"), ("All Files", "*.*")))
+        self.filenameExport.delete(0, END)
+        self.filenameExport.insert(0, filename)
 
     def creeTabAjout(self):
         self.tabAdd = ttk.Frame(self.tabs)
