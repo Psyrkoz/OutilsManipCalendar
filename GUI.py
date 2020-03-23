@@ -137,6 +137,6 @@ class GUI:
         if(dateMaxArray[0] != '' and dateMaxArray[1] != '' and dateMaxArray[2] != ''): 
             dateMax = "-".join(dateMaxArray[::-1]) + "T00:00:00.000000Z" # Passe d'une date tableau JJ MM YYYY a une date string YYYY-MM-JJ (avec en plus T00:00:00.000000Z <- Z pour UTC)
 
-        export(self.service, self.selectedID, "filename.ics", dateMin=dateMin, dateMax=dateMax)
+        export(self.service, self.selectedID, self.filenameExport.get(), dateMin=dateMin, dateMax=dateMax)
 
         
