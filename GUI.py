@@ -2,6 +2,7 @@ from tkinter import Tk, Label, Button, Entry, ttk, LEFT, X, BOTTOM, TOP, END, Op
 from tkinter.filedialog import askopenfilename
 from connexion import GoogleConnexion
 from DateEntry import DateEntry
+from manip import export
 
 class GUI:
     def __init__(self):
@@ -77,7 +78,7 @@ class GUI:
         self.dateFinEntry.pack(side=LEFT)
 
         #Bouton
-        self.buttonExport = Button(self.tabExport, text = "Exporter données")
+        self.buttonExport = Button(self.tabExport, text = "Exporter données", command = self.exportData)
 
         self.lineDate.pack()
         self.buttonExport.pack(expand=True, fill=X)
@@ -109,5 +110,19 @@ class GUI:
 
     def addICSFileToCalendar(self):
         pass
+
+    def exportData(self):
+        dateMinArray = self.dateDebutEntry.get()
+        dateMaxArray = self.dateFinEntry.get()
+
+        dateMin = None
+        if(dateMinArray[0] != '' and dateMinArray[1] != '' and dateMinArray[2] != ''): 
+            dateMin = "-".join(dateMinArray[::-1]) + "T00:00:00.000000Z" # Passe d'une date tableau JJ MM YYYY a une date string YYYY-MM-JJ (avec en plus T00:00:00.000000Z <- Z pour UTC)
+        
+        dateMax = None
+        if(dateMaxArray[0] != '' and dateMaxArray[1] != '' and dateMaxArray[2] != ''): 
+            dateMax = "-".join(dateMaxArray[::-1]) + "T00:00:00.000000Z" # Passe d'une date tableau JJ MM YYYY a une date string YYYY-MM-JJ (avec en plus T00:00:00.000000Z <- Z pour UTC)
+
+        export(self.service, self.selectedID, "filename.ics", dateMin=dateMin, dateMax=dateMax)
 
         
