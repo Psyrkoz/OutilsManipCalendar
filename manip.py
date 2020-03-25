@@ -32,8 +32,6 @@ def convertOffsetTimeToUTCGoogleFormat(date):
 
 def export(service, calendarName, calendarID, filename, dateMin = None, dateMax = None):
     events_result = service.events().list(calendarId=calendarID, timeMin=dateMin, timeMax=dateMax).execute()["items"]
-    print(events_result)
-    print("--- TEXT ON ICS FILE ---")
     textFile = "BEGIN:VCALENDAR\nPRODID:-//Google Inc//Google Calendar 70.9054//EN\nVERSION:2.0\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\nX-WR-CALNAME:" + calendarName + "\nX-WR-TIMEZONE:Europe/Paris\n"
     now = removeMilliseconds(datetime.datetime.utcnow().isoformat() + 'Z').replace(':', '').replace('-', '')
     templateDateTimeEvent = "BEGIN:VEVENT\nDTSTART:{0[start][dateTime]}\nDTEND:{0[end][dateTime]}\nDTSTAMP:" + now + "\nUID:{0[iCalUID]}\nCREATED:{0[created]}\nDESCRIPTION:{0[description]}\nLAST-MODIFIED:{0[updated]}\nLOCATION:{0[location]}\nSEQUENCE:{0[sequence]}\nSTATUS:{0[status]}\nSUMMARY:{0[summary]}\nTRANSP:OPAQUE\nEND:VEVENT\n"
@@ -44,7 +42,7 @@ def export(service, calendarName, calendarID, filename, dateMin = None, dateMax 
         for key in e:
             data[key] = e[key]
         
-        data["created"] = removeAllUselessChar(removeMilliseconds(data["created"]))
+        data["created"] = removeAllUselessChar(removeMilliseconds(data["created"])) # On change le format des dates pour qu'il soit accepté par Google plus tard
         data["updated"] = removeAllUselessChar(removeMilliseconds(data["updated"]))
         # Si l'event est sur toute la journee, c'est "templateFullDayEvent qu'on utilise"
         if "date" in e["start"]:
