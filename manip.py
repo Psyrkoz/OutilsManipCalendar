@@ -1,14 +1,59 @@
 from connexion import GoogleConnexion
+from collections import defaultdict
+import re
 import datetime
 
-def export(service, calendarID, filename, dateMin = None, dateMax = None):
-    events_result = service.events().list(calendarId=calendarID, timeMin=dateMin, timeMax=dateMax).execute()["items"]
+def removeMilliseconds(date):
+    return re.sub("(\.\d{3,})", repl="", string=date)
 
+def removeAllUselessChar(date):
+    return date.replace('-', '').replace(':', '')
+
+def convertOffsetTimeToUTCGoogleFormat(date):
+    dateOffset = re.findall('\+(\d{2}):(\d{2})', date, re.M | re.I)
+    if(dateOffset):
+        dateOffset = dateOffset[0]
+        plusPositionStart = date.find("+")
+        date = date[:plusPositionStart]
+        date = datetime.datetime.strptime(date, "%Y-%m-%dT%H:%M:%S")
+        date = date - datetime.timedelta(hours=int(dateOffset[0]), minutes=int(dateOffset[1]))
+        date = removeAllUselessChar(date.isoformat()) + "Z"
+    else:
+        dateOffset = re.findall('-(\d{2}):(\d{2})', date, re.M | re.I)[0]
+        if(dateOffset):
+            dateOffset = dateOffset[0]
+            minusPositionStart = date.find("+")
+            date = date[:minusPositionStart]
+            date = datetime.datetime.strptime(date, "%Y-%m-%dT%H:%M:%S")
+            date = date + datetime.timedelta(hours=int(dateOffset[0]), minutes=int(dateOffset[1]))
+            date = removeAllUselessChar(date.isoformat()) + "Z"
+
+    return date
+
+def export(service, calendarName, calendarID, filename, dateMin = None, dateMax = None):
+    events_result = service.events().list(calendarId=calendarID, timeMin=dateMin, timeMax=dateMax).execute()["items"]
+    textFile = "BEGIN:VCALENDAR\nPRODID:-//Google Inc//Google Calendar 70.9054//EN\nVERSION:2.0\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\nX-WR-CALNAME:" + calendarName + "\nX-WR-TIMEZONE:Europe/Paris\n"
+    now = removeMilliseconds(datetime.datetime.utcnow().isoformat() + 'Z').replace(':', '').replace('-', '')
+    templateDateTimeEvent = "BEGIN:VEVENT\nDTSTART:{0[start][dateTime]}\nDTEND:{0[end][dateTime]}\nDTSTAMP:" + now + "\nUID:{0[iCalUID]}\nCREATED:{0[created]}\nDESCRIPTION:{0[description]}\nLAST-MODIFIED:{0[updated]}\nLOCATION:{0[location]}\nSEQUENCE:{0[sequence]}\nSTATUS:{0[status]}\nSUMMARY:{0[summary]}\nTRANSP:OPAQUE\nEND:VEVENT\n"
+    templateFullDayEvent =  "BEGIN:VEVENT\nDTSTART;VALUE=DATE:{0[start][date]}\nDTEND;VALUE=DATE:{0[end][date]}\nDTSTAMP:" + now + "\nUID:{0[iCalUID]}\nCREATED:{0[created]}\nDESCRIPTION:{0[description]}\nLAST-MODIFIED:{0[updated]}\nLOCATION:{0[location]}\nSEQUENCE:{0[sequence]}\nSTATUS:{0[status]}\nSUMMARY:{0[summary]}\nTRANSP:OPAQUE\nEND:VEVENT\n"
     for e in events_result:
-        name = e["summary"]
-        dateStart = e["start"]["date"]
-        dateEnd = e["end"]["date"]
-        print("Nom: " + name)
-        print("Date depart: " + dateStart)
-        print("Date fin: " + dateEnd)
-        print("---------------------")
+        # On cree un nouveau dictionnaire basé sur une str factory pour mettre des chaine vide si la cle existe pas
+        data = defaultdict(str)
+        for key in e:
+            data[key] = e[key]
+        
+        data["created"] = removeAllUselessChar(removeMilliseconds(data["created"])) # On change le format des dates pour qu'il soit accepté par Google plus tard
+        data["updated"] = removeAllUselessChar(removeMilliseconds(data["updated"]))
+        # Si l'event est sur toute la journee, c'est "templateFullDayEvent qu'on utilise"
+        if "date" in e["start"]:
+            data["start"]["date"] = removeAllUselessChar(data["start"]["date"])
+            data["end"]["date"] = removeAllUselessChar(data["end"]["date"])
+            textFile += templateFullDayEvent.format(data)
+        # Si il est sur une période on utilise "templateDateTimeEvent"
+        else:
+            data["start"]["dateTime"] = convertOffsetTimeToUTCGoogleFormat(e["start"]["dateTime"])
+            data["end"]["dateTime"] = convertOffsetTimeToUTCGoogleFormat(e["end"]["dateTime"])
+            textFile += templateDateTimeEvent.format(data)
+    textFile += "END:VCALENDAR"
+    with open(filename, "w") as file:
+        file.write(textFile)
