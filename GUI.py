@@ -39,6 +39,7 @@ class GUI:
 
         self.creeListeCalendrier()
         self.tabs = ttk.Notebook(self.window)
+        self.creeTabView()
         self.creeTabAjout()
         self.creeTabExport()
         
@@ -114,6 +115,25 @@ class GUI:
         self.entryLine.pack()
         self.buttonAjouter.pack(expand=True, fill=X)
         self.tabs.add(self.tabAdd, text="Ajout")
+
+    def creeTabView(self):
+        self.tabView = ttk.Frame(self.tabs)
+
+        self.lineDateView = ttk.Frame(self.tabView)
+        self.dateDebutView = Label(self.lineDateView, text = "Date début")
+        self.dateDebutViewEntry = DateEntry(self.lineDateView)
+        self.dateFinView = Label(self.lineDateView, text = "Date fin")
+        self.dateFinViewEntry = DateEntry(self.lineDateView)
+        self.dateDebutView.pack(side=LEFT)
+        self.dateDebutViewEntry.pack(side=LEFT)
+        self.dateFinView.pack(side=LEFT)
+        self.dateFinViewEntry.pack(side=LEFT)
+
+        self.buttonVisualiser = Button(self.tabView, text = "Visualiser")
+
+        self.lineDateView.pack()
+        self.buttonVisualiser.pack(expand=True, fill=X)  
+        self.tabs.add(self.tabView, text="Visualisation")
 
 
     def askForICSFile(self):
