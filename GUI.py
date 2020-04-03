@@ -2,7 +2,7 @@ from tkinter import Tk, Label, Button, Entry, ttk, LEFT, X, BOTTOM, TOP, END, Op
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from connexion import GoogleConnexion
 from DateEntry import DateEntry
-from manip import export
+from manip import export, add, printEvent
 
 class GUI:
     def __init__(self):
@@ -101,6 +101,7 @@ class GUI:
         self.filenameExport.delete(0, END)
         self.filenameExport.insert(0, filename)
 
+
     def creeTabAjout(self):
         self.tabAdd = ttk.Frame(self.tabs)
 
@@ -108,13 +109,15 @@ class GUI:
         self.labelAskICSFile_Add = Label(self.entryLine, text="Fichier .ics a ajouter dans le calendrier:")
         self.entryICSFile_Add = Entry(self.entryLine)
         self.buttonAskICSFile_Add = Button(self.entryLine, text = "...", command = self.askForICSFile)
+        self.labelEventInFile = Label(self.tabAdd, text="", justify=LEFT)
         self.buttonAjouter = Button(self.tabAdd, text = "Ajouter", command = self.addICSFileToCalendar)
 
         self.labelAskICSFile_Add.pack(side=LEFT)
         self.entryICSFile_Add.pack(expand=True, fill=X, side=LEFT)
         self.buttonAskICSFile_Add.pack(side=LEFT)
-
+        
         self.entryLine.pack()
+        self.labelEventInFile.pack()
         self.buttonAjouter.pack(expand=True, fill=X)
         self.tabs.add(self.tabAdd, text="Ajout")
 
@@ -142,6 +145,7 @@ class GUI:
         filename = askopenfilename(title="Selectionner un fichier ICS", filetypes=(("iCalendar File", "*.ics"), ("All Files", "*.*")))
         self.entryICSFile_Add.delete(0, END)
         self.entryICSFile_Add.insert(0, filename)
+        self.labelEventInFile['text']=printEvent(filename)
 
     def addICSFileToCalendar(self):
         pass

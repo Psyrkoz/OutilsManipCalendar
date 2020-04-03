@@ -61,7 +61,22 @@ def export(service, calendarName, calendarID, filename, dateMin = None, dateMax 
     with open(filename, "w") as file:
         file.write(textFile)
 
-def import(service, calendarID, filename):
+def printEvent(filename):
+    g = open(filename,'rb')
+    gcal = Calendar.from_ical(g.read())
+    text=""
+    i=0
+    for component in gcal.walk():
+        if component.name == "VEVENT":
+            i+=1
+            text+="\nEvènement n°" + str(i) + " :\n"
+            text+="\tRésumé : " + str(component.get('summary'))+"\n"
+            text+="\tDébut : " + component.get('dtstart').dt.strftime("%d/%m/%Y, %H:%M")+"\n"
+            text+="\tFin : " + component.get('dtend').dt.strftime("%d/%m/%Y, %H:%M")+"\n"
+    g.close()
+    return text
+
+def add(service, calendarID, filename):
     g = open(filename,'rb')
     gcal = Calendar.from_ical(g.read())
     for component in gcal.walk():
