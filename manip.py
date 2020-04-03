@@ -88,8 +88,8 @@ def add(service, calendarID, filename):
                 event['location']=str(component.get('location'))
             if component.get('description') is not None:
                 event['description']=str(component.get('description'))
-            event['start']={'dateTime':str(component.get('dtstart').dt)}
-            event['end']={'dateTime':str(component.get('dtend').dt)}
+            event['start']={'dateTime':str(component.get('dtstart').dt.isoformat())}
+            event['end']={'dateTime':str(component.get('dtend').dt.isoformat())}
             if component.get('attendee') is not None:
                 event['attendees']=[]
                 if isinstance(component.get('attendee'), list):

@@ -148,7 +148,7 @@ class GUI:
         self.labelEventInFile['text']=printEvent(filename)
 
     def addICSFileToCalendar(self):
-        pass
+        add(self.service, self.selectedID, self.entryICSFile_Add.get())
 
     def exportData(self):
         dateMinArray = self.dateDebutEntry.get()
