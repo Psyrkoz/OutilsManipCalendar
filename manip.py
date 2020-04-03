@@ -2,6 +2,9 @@ from connexion import GoogleConnexion
 from collections import defaultdict
 import re
 import datetime
+from icalendar import Calendar, Event
+from datetime import datetime
+from pytz import UTC # timezone
 
 def removeMilliseconds(date):
     return re.sub("(\.\d{3,})", repl="", string=date)
@@ -57,3 +60,42 @@ def export(service, calendarName, calendarID, filename, dateMin = None, dateMax 
     textFile += "END:VCALENDAR"
     with open(filename, "w") as file:
         file.write(textFile)
+
+def printEvent(filename):
+    g = open(filename,'rb')
+    gcal = Calendar.from_ical(g.read())
+    text=""
+    i=0
+    for component in gcal.walk():
+        if component.name == "VEVENT":
+            i+=1
+            text+="\nEvènement n°" + str(i) + " :\n"
+            text+="\tRésumé : " + str(component.get('summary'))+"\n"
+            text+="\tDébut : " + component.get('dtstart').dt.strftime("%d/%m/%Y, %H:%M")+"\n"
+            text+="\tFin : " + component.get('dtend').dt.strftime("%d/%m/%Y, %H:%M")+"\n"
+    g.close()
+    return text
+
+def add(service, calendarID, filename):
+    g = open(filename,'rb')
+    gcal = Calendar.from_ical(g.read())
+    for component in gcal.walk():
+        event={}
+        if component.name == "VEVENT":
+            if component.get('summary') is not None:
+                event['summary']=str(component.get('summary'))
+            if component.get('location') is not None:
+                event['location']=str(component.get('location'))
+            if component.get('description') is not None:
+                event['description']=str(component.get('description'))
+            event['start']={'dateTime':str(component.get('dtstart').dt)}
+            event['end']={'dateTime':str(component.get('dtend').dt)}
+            if component.get('attendee') is not None:
+                event['attendees']=[]
+                if isinstance(component.get('attendee'), list):
+                    for a in component.get('attendee'):
+                        event['attendees'].append({'email':str(a).split(":")[1]})
+                else:
+                    event['attendees'].append({'email':str(component.get('attendee')).split(":")[1]})
+            event = service.events().insert(calendarId=calendarID, body=event).execute()
+    g.close()
