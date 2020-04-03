@@ -22,7 +22,7 @@ def convertOffsetTimeToUTCGoogleFormat(date):
         dateOffset = re.findall('-(\d{2}):(\d{2})', date, re.M | re.I)[0]
         if(dateOffset):
             dateOffset = dateOffset[0]
-            minusPositionStart = date.find("+")
+            minusPositionStart = date.find("-")
             date = date[:minusPositionStart]
             date = datetime.datetime.strptime(date, "%Y-%m-%dT%H:%M:%S")
             date = date + datetime.timedelta(hours=int(dateOffset[0]), minutes=int(dateOffset[1]))
