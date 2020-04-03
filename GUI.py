@@ -53,8 +53,8 @@ class GUI:
         listeCalendriers = self.service.calendarList().list().execute()
         self.nomEtIdCalendriers = dict()
         for c in listeCalendriers['items']:
-            if c['summary'] not in ['Contacts', 'Jours fériés en France', 'Week Numbers']:
-                self.nomEtIdCalendriers[c['summary']] = c['id']
+            #if c['summary'] not in ['Contacts', 'Jours fériés en France', 'Week Numbers']:
+            self.nomEtIdCalendriers[c['summary']] = c['id']
 
         self.calendarsList = OptionMenu(self.window, variable, *(self.nomEtIdCalendriers.keys()), command = self.setSelectedID)
 
