@@ -129,11 +129,11 @@ def getEvent(service, calendarID, dateMin = None, dateMax = None):
     dateStart = None
     dateEnd = None
 
-    if(dateMin is not None):
+    if(dateMin is not None and dateMin[0] != '' and dateMin[1] != '' and dateMin[2] != ''):
         dateStart = datetime(day=int(dateMin[0]), month=int(dateMin[1]), year=int(dateMin[2]))
         dateStart = dateStart.isoformat() + "Z"
     
-    if(dateMax is not None):
+    if(dateMax is not None and dateMax[0] != '' and dateMax[1] != '' and dateMax[2] != ''):
         dateEnd = datetime(day=int(dateMax[0]), month=int(dateMax[1]), year=int(dateMax[2]))
         dateEnd = dateEnd.isoformat() + "Z"
 
