@@ -1,4 +1,4 @@
-from tkinter import Tk, Label, Button, Entry, ttk, LEFT, X, BOTTOM, TOP, END, OptionMenu, StringVar
+from tkinter import Tk, Label, Button, Entry, ttk, LEFT, X, BOTTOM, TOP, END, OptionMenu, StringVar, Event
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from connexion import GoogleConnexion
 from DateEntry import DateEntry
@@ -31,6 +31,11 @@ class GUI:
         self.button.pack()
         self.window.mainloop()
     
+    def resizeTab(self, event):
+        event.widget.update_idletasks()
+        tab = event.widget.nametowidget(event.widget.select())
+        event.widget.configure(height=tab.winfo_reqheight())
+
     def createGUIApplication(self):
         GoogleConnexion.displayEvents(self.service)
         # Cree la fenêtre
@@ -45,6 +50,7 @@ class GUI:
         self.creeTabExport()
         
         self.tabs.pack(expand=1, fill='both')
+        self.tabs.bind("<<NotebookTabChanged>>", self.resizeTab)
         self.window.mainloop()
 
     def creeListeCalendrier(self):
@@ -101,7 +107,6 @@ class GUI:
         self.filenameExport.delete(0, END)
         self.filenameExport.insert(0, filename)
 
-
     def creeTabAjout(self):
         self.tabAdd = ttk.Frame(self.tabs)
 
@@ -146,6 +151,7 @@ class GUI:
         self.entryICSFile_Add.delete(0, END)
         self.entryICSFile_Add.insert(0, filename)
         self.labelEventInFile['text']=printEvent(filename)
+        self.tabs.event_generate("<<NotebookTabChanged>>") # Génère un event pour redimensionner la tab -> voir fonction resizeTab
 
     def addICSFileToCalendar(self):
         pass
