@@ -1,9 +1,8 @@
 from connexion import GoogleConnexion
 from collections import defaultdict
 import re
-import datetime
 from icalendar import Calendar, Event
-from datetime import datetime
+from datetime import datetime, timedelta
 from pytz import UTC # timezone
 
 def removeMilliseconds(date):
@@ -18,8 +17,8 @@ def convertOffsetTimeToUTCGoogleFormat(date):
         dateOffset = dateOffset[0]
         plusPositionStart = date.find("+")
         date = date[:plusPositionStart]
-        date = datetime.datetime.strptime(date, "%Y-%m-%dT%H:%M:%S")
-        date = date - datetime.timedelta(hours=int(dateOffset[0]), minutes=int(dateOffset[1]))
+        date = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S")
+        date = date - timedelta(hours=int(dateOffset[0]), minutes=int(dateOffset[1]))
         date = removeAllUselessChar(date.isoformat()) + "Z"
     else:
         dateOffset = re.findall('-(\d{2}):(\d{2})', date, re.M | re.I)[0]
@@ -27,8 +26,8 @@ def convertOffsetTimeToUTCGoogleFormat(date):
             dateOffset = dateOffset[0]
             minusPositionStart = date.find("-")
             date = date[:minusPositionStart]
-            date = datetime.datetime.strptime(date, "%Y-%m-%dT%H:%M:%S")
-            date = date + datetime.timedelta(hours=int(dateOffset[0]), minutes=int(dateOffset[1]))
+            date = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S")
+            date = date + timedelta(hours=int(dateOffset[0]), minutes=int(dateOffset[1]))
             date = removeAllUselessChar(date.isoformat()) + "Z"
 
     return date
@@ -36,7 +35,7 @@ def convertOffsetTimeToUTCGoogleFormat(date):
 def export(service, calendarName, calendarID, filename, dateMin = None, dateMax = None):
     events_result = service.events().list(calendarId=calendarID, timeMin=dateMin, timeMax=dateMax).execute()["items"]
     textFile = "BEGIN:VCALENDAR\nPRODID:-//Google Inc//Google Calendar 70.9054//EN\nVERSION:2.0\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\nX-WR-CALNAME:" + calendarName + "\nX-WR-TIMEZONE:Europe/Paris\n"
-    now = removeMilliseconds(datetime.datetime.utcnow().isoformat() + 'Z').replace(':', '').replace('-', '')
+    now = removeMilliseconds(datetime.utcnow().isoformat() + 'Z').replace(':', '').replace('-', '')
     templateDateTimeEvent = "BEGIN:VEVENT\nDTSTART:{0[start][dateTime]}\nDTEND:{0[end][dateTime]}\nDTSTAMP:" + now + "\nUID:{0[iCalUID]}\nCREATED:{0[created]}\nDESCRIPTION:{0[description]}\nLAST-MODIFIED:{0[updated]}\nLOCATION:{0[location]}\nSEQUENCE:{0[sequence]}\nSTATUS:{0[status]}\nSUMMARY:{0[summary]}\nTRANSP:OPAQUE\nEND:VEVENT\n"
     templateFullDayEvent =  "BEGIN:VEVENT\nDTSTART;VALUE=DATE:{0[start][date]}\nDTEND;VALUE=DATE:{0[end][date]}\nDTSTAMP:" + now + "\nUID:{0[iCalUID]}\nCREATED:{0[created]}\nDESCRIPTION:{0[description]}\nLAST-MODIFIED:{0[updated]}\nLOCATION:{0[location]}\nSEQUENCE:{0[sequence]}\nSTATUS:{0[status]}\nSUMMARY:{0[summary]}\nTRANSP:OPAQUE\nEND:VEVENT\n"
     for e in events_result:
@@ -99,3 +98,70 @@ def add(service, calendarID, filename):
                     event['attendees'].append({'email':str(component.get('attendee')).split(":")[1]})
             event = service.events().insert(calendarId=calendarID, body=event).execute()
     g.close()
+
+# date supposed YYYY-MM-DD; return DD/MM/YYYY
+def formatDate(date):
+    return "/".join(date.split('-')[::-1])
+
+# date supposed "YYYY-MM-DDTHH:MM:SS+XX:XX"; return DD/MM/YYYY a HH:MM:SS
+def formatDateWithHour(date):
+    dateSplit = date.split('T')
+    date = formatDate(dateSplit[0])
+    time = dateSplit[1].split('+')[0]
+
+    return date + " à " + time
+
+# dateStart et dateEnd dans ce format: "YYYY-MM-DDTHH:MM:SS+XX:XX"
+def deltaBetweenDate(dateStart, dateEnd):
+    dateStartArray = dateStart.split("T")[0].split("-")[::-1]
+    timeStartArray = dateStart.split("T")[1].split("+")[0].split(":")
+    dateEndArray = dateEnd.split("T")[0].split("-")[::-1]
+    timeEndArray = dateEnd.split("T")[1].split("+")[0].split(":")
+    ds = datetime(day=int(dateStartArray[0]), month=int(dateStartArray[1]), year=int(dateStartArray[2]), hour=int(timeStartArray[0]), minute=int(timeStartArray[1]), second=int(timeStartArray[2]))
+    de = datetime(day=int(dateEndArray[0]), month=int(dateEndArray[1]), year=int(dateEndArray[2]), hour=int(timeEndArray[0]), minute=int(timeEndArray[1]), second=int(timeEndArray[2]))
+
+    delta = de - ds
+    delta = str(delta).split(":")
+    return delta[0] + "h " + delta[1] + "m " + delta[2] + "s"
+
+# dateMin: [JJ/MM/YYYY] & dateMax: [JJ/MM/YYYY]
+def getEvent(service, calendarID, dateMin = None, dateMax = None):
+    dateStart = None
+    dateEnd = None
+
+    if(dateMin is not None and dateMin[0] != '' and dateMin[1] != '' and dateMin[2] != ''):
+        dateStart = datetime(day=int(dateMin[0]), month=int(dateMin[1]), year=int(dateMin[2]))
+        dateStart = dateStart.isoformat() + "Z"
+    
+    if(dateMax is not None and dateMax[0] != '' and dateMax[1] != '' and dateMax[2] != ''):
+        dateEnd = datetime(day=int(dateMax[0]), month=int(dateMax[1]), year=int(dateMax[2]))
+        dateEnd = dateEnd.isoformat() + "Z"
+
+    events_result = service.events().list(calendarId=calendarID, timeMin=dateStart,
+                                            timeMax=dateEnd, singleEvents=True,
+                                            orderBy='startTime').execute()
+    events = events_result.get('items', [])
+    
+    text = ""
+    i = 0
+    for event in events:
+        i+=1
+        # Met le résumé (si disponible) dans le texte:
+        text+="\nEvènement n°" + str(i) + " :\n"
+        text +="\tRésumé: "
+        text += event['summary'] + "\n" if "summary" in event else "Aucun résumé disponible\n"
+
+        # Si l'événement est sur une période donnée
+        if "dateTime" in event['start']:
+            dateDebut = formatDateWithHour(event['start']['dateTime'])
+            duree = deltaBetweenDate(event['start']['dateTime'], event['end']['dateTime'])
+            text+="\tDébut: " + dateDebut + "\n"
+            text+="\tDurée: " + duree +"\n"
+        # Sinon, l'évènement est sur toute la journée (clé différentes)
+        else:
+            date = formatDate(event['start']['date'])
+            text+="\tDébut: " + date + "\n"
+            text+="\tDurée: Toute la journée\n"
+        
+    return text
+
