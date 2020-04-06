@@ -2,7 +2,7 @@ from tkinter import Tk, Label, Button, Entry, ttk, LEFT, X, BOTTOM, TOP, END, Op
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from connexion import GoogleConnexion
 from DateEntry import DateEntry
-from manip import export
+from manip import export, add, printEvent
 
 class GUI:
     def __init__(self):
@@ -40,6 +40,7 @@ class GUI:
 
         self.creeListeCalendrier()
         self.tabs = ttk.Notebook(self.window)
+        self.creeTabView()
         self.creeTabAjout()
         self.creeTabExport()
         
@@ -52,8 +53,8 @@ class GUI:
         listeCalendriers = self.service.calendarList().list().execute()
         self.nomEtIdCalendriers = dict()
         for c in listeCalendriers['items']:
-            if c['summary'] not in ['Contacts', 'Jours fériés en France', 'Week Numbers']:
-                self.nomEtIdCalendriers[c['summary']] = c['id']
+            #if c['summary'] not in ['Contacts', 'Jours fériés en France', 'Week Numbers']:
+            self.nomEtIdCalendriers[c['summary']] = c['id']
 
         self.calendarsList = OptionMenu(self.window, variable, *(self.nomEtIdCalendriers.keys()), command = self.setSelectedID)
 
@@ -100,6 +101,7 @@ class GUI:
         self.filenameExport.delete(0, END)
         self.filenameExport.insert(0, filename)
 
+
     def creeTabAjout(self):
         self.tabAdd = ttk.Frame(self.tabs)
 
@@ -107,21 +109,43 @@ class GUI:
         self.labelAskICSFile_Add = Label(self.entryLine, text="Fichier .ics a ajouter dans le calendrier:")
         self.entryICSFile_Add = Entry(self.entryLine)
         self.buttonAskICSFile_Add = Button(self.entryLine, text = "...", command = self.askForICSFile)
+        self.labelEventInFile = Label(self.tabAdd, text="", justify=LEFT)
         self.buttonAjouter = Button(self.tabAdd, text = "Ajouter", command = self.addICSFileToCalendar)
 
         self.labelAskICSFile_Add.pack(side=LEFT)
         self.entryICSFile_Add.pack(expand=True, fill=X, side=LEFT)
         self.buttonAskICSFile_Add.pack(side=LEFT)
-
+        
         self.entryLine.pack()
+        self.labelEventInFile.pack()
         self.buttonAjouter.pack(expand=True, fill=X)
         self.tabs.add(self.tabAdd, text="Ajout")
+
+    def creeTabView(self):
+        self.tabView = ttk.Frame(self.tabs)
+
+        self.lineDateView = ttk.Frame(self.tabView)
+        self.dateDebutView = Label(self.lineDateView, text = "Date début")
+        self.dateDebutViewEntry = DateEntry(self.lineDateView)
+        self.dateFinView = Label(self.lineDateView, text = "Date fin")
+        self.dateFinViewEntry = DateEntry(self.lineDateView)
+        self.dateDebutView.pack(side=LEFT)
+        self.dateDebutViewEntry.pack(side=LEFT)
+        self.dateFinView.pack(side=LEFT)
+        self.dateFinViewEntry.pack(side=LEFT)
+
+        self.buttonVisualiser = Button(self.tabView, text = "Visualiser")
+
+        self.lineDateView.pack()
+        self.buttonVisualiser.pack(expand=True, fill=X)  
+        self.tabs.add(self.tabView, text="Visualisation")
 
 
     def askForICSFile(self):
         filename = askopenfilename(title="Selectionner un fichier ICS", filetypes=(("iCalendar File", "*.ics"), ("All Files", "*.*")))
         self.entryICSFile_Add.delete(0, END)
         self.entryICSFile_Add.insert(0, filename)
+        self.labelEventInFile['text']=printEvent(filename)
 
     def addICSFileToCalendar(self):
         pass
