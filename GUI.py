@@ -1,8 +1,8 @@
-from tkinter import Tk, Label, Button, Entry, ttk, LEFT, X, BOTTOM, TOP, END, OptionMenu, StringVar
+from tkinter import Tk, Label, Button, Entry, ttk, LEFT, X, BOTTOM, TOP, END, OptionMenu, StringVar, Event
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from connexion import GoogleConnexion
 from DateEntry import DateEntry
-from manip import export, add, printEvent
+from manip import export, add, printEvent, getEvent
 
 class GUI:
     def __init__(self):
@@ -31,6 +31,11 @@ class GUI:
         self.button.pack()
         self.window.mainloop()
     
+    def resizeTab(self, event):
+        event.widget.update_idletasks()
+        tab = event.widget.nametowidget(event.widget.select())
+        event.widget.configure(height=tab.winfo_reqheight())
+
     def createGUIApplication(self):
         GoogleConnexion.displayEvents(self.service)
         # Cree la fenêtre
@@ -45,6 +50,7 @@ class GUI:
         self.creeTabExport()
         
         self.tabs.pack(expand=1, fill='both')
+        self.tabs.bind("<<NotebookTabChanged>>", self.resizeTab)
         self.window.mainloop()
 
     def creeListeCalendrier(self):
@@ -101,7 +107,6 @@ class GUI:
         self.filenameExport.delete(0, END)
         self.filenameExport.insert(0, filename)
 
-
     def creeTabAjout(self):
         self.tabAdd = ttk.Frame(self.tabs)
 
@@ -134,18 +139,32 @@ class GUI:
         self.dateFinView.pack(side=LEFT)
         self.dateFinViewEntry.pack(side=LEFT)
 
-        self.buttonVisualiser = Button(self.tabView, text = "Visualiser")
+        self.buttonVisualiser = Button(self.tabView, text = "Visualiser", command = self.visualiserEvent)
+        self.eventViewLabel = Label(self.tabView, text="", justify=LEFT)
 
         self.lineDateView.pack()
-        self.buttonVisualiser.pack(expand=True, fill=X)  
+        self.buttonVisualiser.pack(expand=True, fill=X)
+        self.eventViewLabel.pack()
         self.tabs.add(self.tabView, text="Visualisation")
 
+
+    def visualiserEvent(self):
+        dateMin = self.dateDebutViewEntry.get()
+        dateMax = self.dateFinViewEntry.get()
+
+        if(any(d == '' for d in dateMin) or any(d == '' for d in dateMax)):
+            pass
+        
+        self.eventViewLabel['text'] = getEvent(self.service, self.selectedID, dateMin, dateMax)
+        self.tabs.event_generate("<<NotebookTabChanged>>")
+        
 
     def askForICSFile(self):
         filename = askopenfilename(title="Selectionner un fichier ICS", filetypes=(("iCalendar File", "*.ics"), ("All Files", "*.*")))
         self.entryICSFile_Add.delete(0, END)
         self.entryICSFile_Add.insert(0, filename)
         self.labelEventInFile['text']=printEvent(filename)
+        self.tabs.event_generate("<<NotebookTabChanged>>") # Génère un event pour redimensionner la tab -> voir fonction resizeTab
 
     def addICSFileToCalendar(self):
         pass
@@ -163,5 +182,3 @@ class GUI:
             dateMax = "-".join(dateMaxArray[::-1]) + "T00:00:00.000000Z" # Passe d'une date tableau JJ MM YYYY a une date string YYYY-MM-JJ (avec en plus T00:00:00.000000Z <- Z pour UTC)
 
         export(self.service, self.selectedName,self.selectedID, self.filenameExport.get(), dateMin=dateMin, dateMax=dateMax)
-
-        
