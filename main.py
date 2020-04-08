@@ -1,3 +1,5 @@
-from GUI import GUI
+from connexion import GoogleConnexion
 
-UI = GUI()
+
+if(__name__ == "__main__"):
+    gc = GoogleConnexion()

@@ -1,4 +1,3 @@
-from connexion import GoogleConnexion
 from collections import defaultdict
 import re
 from icalendar import Calendar, Event
