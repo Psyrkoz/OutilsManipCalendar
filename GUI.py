@@ -26,10 +26,12 @@ class GUI:
         self.creeTabAjout()
         self.creeTabExport()
         self.disconnectButton = Button(self.window, text = "Déconnexion", command = self.disconnect)
+        self.exitButton = Button(self.window, text = "Quitter l'application", command = self.window.destroy)
         
         self.tabs.pack(expand=1, fill='both')
         self.tabs.bind("<<NotebookTabChanged>>", self.resizeTab)
         self.disconnectButton.pack(expand=1, fill=X)
+        self.exitButton.pack(expand=1, fill=X)
         self.window.mainloop()
 
     def disconnect(self):
