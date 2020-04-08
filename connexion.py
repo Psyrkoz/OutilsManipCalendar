@@ -2,7 +2,7 @@ from __future__ import print_function
 import datetime
 import pickle
 import os.path
-import GUI
+from GUI import GUI
 from tkinter import Tk, Label, Button, Entry, ttk, LEFT, X, BOTTOM, TOP, END, OptionMenu, StringVar, Event
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from googleapiclient.discovery import build
@@ -31,6 +31,7 @@ class GoogleConnexion:
             textButton = "Connexion a un compte Google"
 
         self.button = Button(self.window, text=textButton, command = self.connexionGoogle)
+
         # Ajoute les boutons dans la fenêtre et lance la boucle
         self.connexionTexte.pack()
         self.button.pack()
@@ -42,14 +43,21 @@ class GoogleConnexion:
         service = GoogleConnexion.connectToGoogle()
         self.window.destroy()
 
-        gui = GUI.GUI(service)
+        gui = GUI(service)
 
     def otherAccountConnexionGoogle(self):
-        pass
+        os.remove('token.pickle')
+        self.window.destroy()
+
+        self.createInterface()
 
     @staticmethod
     def hasToken():
         return os.path.exists('token.pickle')
+    
+    @staticmethod
+    def deleteToken():
+        return os.remove('token.pickle')
 
     @staticmethod
     def connectToGoogle():

@@ -2,6 +2,7 @@ from tkinter import Tk, Label, Button, Entry, ttk, LEFT, X, BOTTOM, TOP, END, Op
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from DateEntry import DateEntry
 from manip import export, add, printEvent, getEvent
+import connexion
 
 class GUI:
     def __init__(self, service):
@@ -32,7 +33,9 @@ class GUI:
         self.window.mainloop()
 
     def disconnect(self):
-        pass
+        self.window.destroy()
+        connexion.GoogleConnexion.deleteToken()
+        g = connexion.GoogleConnexion()
 
     def creeListeCalendrier(self):
         variable = StringVar(self.window)

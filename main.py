@@ -1,3 +1,5 @@
-import connexion
+from connexion import GoogleConnexion
 
-gc = connexion.GoogleConnexion()
+
+if(__name__ == "__main__"):
+    gc = GoogleConnexion()
