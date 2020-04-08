@@ -2,6 +2,9 @@ from __future__ import print_function
 import datetime
 import pickle
 import os.path
+import GUI
+from tkinter import Tk, Label, Button, Entry, ttk, LEFT, X, BOTTOM, TOP, END, OptionMenu, StringVar, Event
+from tkinter.filedialog import askopenfilename, asksaveasfilename
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -9,6 +12,41 @@ from google.auth.transport.requests import Request
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 class GoogleConnexion:
+
+    def __init__(self):
+        self.createInterface()
+
+    def createInterface(self):
+        # Cree la fenêtre
+        self.window = Tk()
+        self.window.resizable(width=False, height=False)
+        self.window.title("Connexion au service Google")
+        self.connexionTexte = Label(self.window, text="Une connexion au service Google est nécessaire!")
+
+        self.buttonDisconnect = None
+        if(GoogleConnexion.hasToken()):
+            textButton = "Connexion en utilisant le token"
+            self.buttonDisconnect = Button(self.window, text="Connection a un autre compte Google", command = self.otherAccountConnexionGoogle)
+        else:
+            textButton = "Connexion a un compte Google"
+
+        self.button = Button(self.window, text=textButton, command = self.connexionGoogle)
+        # Ajoute les boutons dans la fenêtre et lance la boucle
+        self.connexionTexte.pack()
+        self.button.pack()
+        if(self.buttonDisconnect is not None):
+            self.buttonDisconnect.pack()
+        self.window.mainloop()
+
+    def connexionGoogle(self):
+        service = GoogleConnexion.connectToGoogle()
+        self.window.destroy()
+
+        gui = GUI.GUI(service)
+
+    def otherAccountConnexionGoogle(self):
+        pass
+
     @staticmethod
     def hasToken():
         return os.path.exists('token.pickle')

@@ -1,3 +1,3 @@
-from GUI import GUI
+import connexion
 
-UI = GUI()
+gc = connexion.GoogleConnexion()

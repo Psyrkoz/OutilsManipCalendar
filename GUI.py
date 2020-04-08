@@ -1,35 +1,12 @@
 from tkinter import Tk, Label, Button, Entry, ttk, LEFT, X, BOTTOM, TOP, END, OptionMenu, StringVar, Event
 from tkinter.filedialog import askopenfilename, asksaveasfilename
-from connexion import GoogleConnexion
 from DateEntry import DateEntry
 from manip import export, add, printEvent, getEvent
 
 class GUI:
-    def __init__(self):
-        if(GoogleConnexion.hasToken()):
-            self.service = GoogleConnexion.connectToGoogle() # Si le token existe, on se connecte directement
-            self.createGUIApplication()
-        else:
-            self.createGUIConnexion()
-
-    def connexionGoogle(self):
-        self.service = GoogleConnexion.connectToGoogle()
-        self.window.destroy()
-
+    def __init__(self, service):
+        self.service = service
         self.createGUIApplication()
-
-    def createGUIConnexion(self):
-        # Cree la fenêtre
-        self.window = Tk()
-        self.window.resizable(width=False, height=False)
-        self.window.title("Connexion au service Google")
-        self.connexionTexte = Label(self.window, text="Une connexion au service Google est nécessaire!")
-        self.button = Button(self.window, text="Connexion", command = self.connexionGoogle)
-
-        # Ajoute les boutons dans la fenêtre et lance la boucle
-        self.connexionTexte.pack()
-        self.button.pack()
-        self.window.mainloop()
     
     def resizeTab(self, event):
         event.widget.update_idletasks()
@@ -37,7 +14,6 @@ class GUI:
         event.widget.configure(height=tab.winfo_reqheight())
 
     def createGUIApplication(self):
-        GoogleConnexion.displayEvents(self.service)
         # Cree la fenêtre
         self.window = Tk()
         self.window.resizable(width=False, height=False)
@@ -48,10 +24,15 @@ class GUI:
         self.creeTabView()
         self.creeTabAjout()
         self.creeTabExport()
+        self.disconnectButton = Button(self.window, text = "Déconnexion", command = self.disconnect)
         
         self.tabs.pack(expand=1, fill='both')
         self.tabs.bind("<<NotebookTabChanged>>", self.resizeTab)
+        self.disconnectButton.pack(expand=1, fill=X)
         self.window.mainloop()
+
+    def disconnect(self):
+        pass
 
     def creeListeCalendrier(self):
         variable = StringVar(self.window)
