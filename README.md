@@ -11,7 +11,7 @@ Le logiciel est programmé en Python 3 sous Ubuntu 18.04 LTS
 Pour installer ce logiciel il suffit d'entrée les commandes suivantes:\
 ```bash
 git clone https://github.com/Psyrkoz/OutilsManipCalendar
-pip install icalendar
+pip install icalendar oauth2client
 pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 ```
 

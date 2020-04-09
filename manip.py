@@ -71,12 +71,13 @@ def printEvent(filename):
             text+="\nEvènement n°" + str(i) + " :\n"
             text+="\tRésumé : " + str(component.get('summary'))+"\n"
             if len(str(component.get('dtstart').dt.isoformat())) == 10:
-                if (component.get('dtend').dt - component.get('dtstart').dt).days <= 1:
-                    text+="\tDébut : " + component.get('dtstart').dt.strftime("%d/%m/%Y")+"\n\tToute la journée\n"
-                else:
-                    text+="\tDébut : " + component.get('dtstart').dt.strftime("%d/%m/%Y")+"\n"
+                j = (component.get('dtend').dt - component.get('dtstart').dt).days
+                text+="\tDurée : " + str(j) + " j\n"
+                text+="\tDébut : " + component.get('dtstart').dt.strftime("%d/%m/%Y")+"\n"
+                if j > 1:
                     text+="\tFin : " + component.get('dtend').dt.strftime("%d/%m/%Y")+"\n"
             else:
+                text+="\tDurée : " + deltaBetweenDate(component.get('dtstart').dt.isoformat("T"),component.get('dtend').dt.isoformat("T"))+"\n"
                 text+="\tDébut : " + component.get('dtstart').dt.strftime("%d/%m/%Y, %H:%M")+"\n"
                 text+="\tFin : " + component.get('dtend').dt.strftime("%d/%m/%Y, %H:%M")+"\n"
             listEv.append(text)
@@ -120,8 +121,8 @@ def formatDateWithHour(date):
     dateSplit = date.split('T')
     date = formatDate(dateSplit[0])
     time = dateSplit[1].split('+')[0]
-
-    return date + " à " + time
+    time = time.split(":")
+    return date + ", " + time[0] + ":" + time[1]
 
 # dateStart et dateEnd dans ce format: "YYYY-MM-DDTHH:MM:SS+XX:XX"
 def deltaBetweenDate(dateStart, dateEnd):
@@ -134,7 +135,12 @@ def deltaBetweenDate(dateStart, dateEnd):
 
     delta = de - ds
     delta = str(delta).split(":")
-    return delta[0] + "h " + delta[1] + "m " + delta[2] + "s"
+    engD = delta[0] + "h " + delta[1] + "m " + delta[2] + "s"
+    delta = re.split("day,|days,",engD)
+    if len(delta) > 1:
+        return delta[0] + "j," + delta[1]
+    else:
+        return delta[0]
 
 # dateMin: [JJ/MM/YYYY] & dateMax: [JJ/MM/YYYY]
 def getEvent(service, calendarID, dateMin = None, dateMax = None):
@@ -167,14 +173,25 @@ def getEvent(service, calendarID, dateMin = None, dateMax = None):
         # Si l'événement est sur une période donnée
         if "dateTime" in event['start']:
             dateDebut = formatDateWithHour(event['start']['dateTime'])
+            dateFin = formatDateWithHour(event['end']['dateTime'])
             duree = deltaBetweenDate(event['start']['dateTime'], event['end']['dateTime'])
-            text+="\tDébut: " + dateDebut + "\n"
-            text+="\tDurée: " + duree +"\n"
+            text+="\tDurée : " + duree +"\n"
+            text+="\tDébut : " + dateDebut + "\n"
+            text+="\tFin : " + dateFin +"\n"
         # Sinon, l'évènement est sur toute la journée (clé différentes)
         else:
-            date = formatDate(event['start']['date'])
-            text+="\tDébut: " + date + "\n"
-            text+="\tDurée: Toute la journée\n"
+            dateDebut = formatDate(event['start']['date'])
+            dateFin = formatDate(event['end']['date'])
+            dateStartArray = event['start']['date'].split("-")[::-1]
+            dateEndArray = event['end']['date'].split("-")[::-1]
+            ds = datetime(day=int(dateStartArray[0]), month=int(dateStartArray[1]), year=int(dateStartArray[2]))
+            de = datetime(day=int(dateEndArray[0]), month=int(dateEndArray[1]), year=int(dateEndArray[2]))
+
+            j = (de - ds).days
+            text+="\tDurée : " + str(j) + " j\n"
+            text+="\tDébut : " + dateDebut + "\n"
+            if j > 1:
+                    text+="\tFin : " + dateFin + "\n"
         listEv.append(text)
         
     return listEv
