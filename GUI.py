@@ -1,4 +1,4 @@
-from tkinter import Tk, Label, Button, Entry, ttk, LEFT, X, BOTTOM, TOP, END, OptionMenu, StringVar, Event
+from tkinter import Tk, Label, Button, Entry, ttk, RIGHT, LEFT, X, Y, BOTTOM, TOP, END, BOTH, OptionMenu, StringVar, Event, Text, Scrollbar
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from DateEntry import DateEntry
 from manip import export, add, printEvent, getEvent
@@ -100,7 +100,7 @@ class GUI:
         self.labelAskICSFile_Add = Label(self.entryLine, text="Fichier .ics a ajouter dans le calendrier:")
         self.entryICSFile_Add = Entry(self.entryLine)
         self.buttonAskICSFile_Add = Button(self.entryLine, text = "...", command = self.askForICSFile)
-        self.labelEventInFile = Label(self.tabAdd, text="", justify=LEFT)
+        self.buttonEventInFile = Button(self.tabAdd, text = "Visualiser", state = "disabled", command = self.openEvent)
         self.buttonAjouter = Button(self.tabAdd, text = "Ajouter", command = self.addICSFileToCalendar)
 
         self.labelAskICSFile_Add.pack(side=LEFT)
@@ -108,7 +108,7 @@ class GUI:
         self.buttonAskICSFile_Add.pack(side=LEFT)
         
         self.entryLine.pack()
-        self.labelEventInFile.pack()
+        self.buttonEventInFile.pack(expand=True, fill=X)
         self.buttonAjouter.pack(expand=True, fill=X)
         self.tabs.add(self.tabAdd, text="Ajout")
 
@@ -126,11 +126,9 @@ class GUI:
         self.dateFinViewEntry.pack(side=LEFT)
 
         self.buttonVisualiser = Button(self.tabView, text = "Visualiser", command = self.visualiserEvent)
-        self.eventViewLabel = Label(self.tabView, text="", justify=LEFT)
 
         self.lineDateView.pack()
         self.buttonVisualiser.pack(expand=True, fill=X)
-        self.eventViewLabel.pack()
         self.tabs.add(self.tabView, text="Visualisation")
 
 
@@ -141,7 +139,17 @@ class GUI:
         if(any(d == '' for d in dateMin) or any(d == '' for d in dateMax)):
             pass
         
-        self.eventViewLabel['text'] = getEvent(self.service, self.selectedID, dateMin, dateMax)
+        root = Tk()
+        root.title("Événements")
+        scrollbar = Scrollbar(root)
+        scrollbar.pack( side = RIGHT, fill = Y )
+        listEv = getEvent(self.service, self.selectedID, dateMin, dateMax)
+        text = Text(root, yscrollcommand = scrollbar.set )
+        for line in listEv:
+            text.insert(END, line)
+
+        text.pack( side = LEFT, fill = BOTH )
+        scrollbar.config( command = text.yview )
         self.tabs.event_generate("<<NotebookTabChanged>>")
         
 
@@ -149,11 +157,24 @@ class GUI:
         filename = askopenfilename(title="Selectionner un fichier ICS", filetypes=(("iCalendar File", "*.ics"), ("All Files", "*.*")))
         self.entryICSFile_Add.delete(0, END)
         self.entryICSFile_Add.insert(0, filename)
-        self.labelEventInFile['text']=printEvent(filename)
+        self.buttonEventInFile['state'] = "normal"
         self.tabs.event_generate("<<NotebookTabChanged>>") # Génère un event pour redimensionner la tab -> voir fonction resizeTab
 
+    def openEvent(self):
+        root = Tk()
+        root.title("Événements")
+        scrollbar = Scrollbar(root)
+        scrollbar.pack( side = RIGHT, fill = Y )
+        listEv = printEvent(self.entryICSFile_Add.get())
+        text = Text(root, yscrollcommand = scrollbar.set )
+        for line in listEv:
+            text.insert(END, line)
+
+        text.pack( side = LEFT, fill = BOTH )
+        scrollbar.config( command = text.yview )
+
     def addICSFileToCalendar(self):
-        pass
+        add(self.service, self.selectedID, self.entryICSFile_Add.get())
 
     def exportData(self):
         dateMinArray = self.dateDebutEntry.get()
