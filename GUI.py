@@ -3,6 +3,7 @@ from tkinter.filedialog import askopenfilename, asksaveasfilename
 from DateEntry import DateEntry
 from manip import export, add, printEvent, getEvent
 import connexion
+import logging
 
 class GUI:
     def __init__(self, service):
@@ -15,6 +16,7 @@ class GUI:
         event.widget.configure(height=tab.winfo_reqheight())
 
     def createGUIApplication(self):
+        logging.info("Création de la fenêtre graphique principale")
         # Cree la fenêtre
         self.window = Tk()
         self.window.resizable(width=False, height=False)
@@ -35,11 +37,13 @@ class GUI:
         self.window.mainloop()
 
     def disconnect(self):
+        logging.info("Déconnexion du compte google")
         self.window.destroy()
         connexion.GoogleConnexion.deleteToken()
         g = connexion.GoogleConnexion()
 
     def creeListeCalendrier(self):
+        logging.info("Récupération de la liste des calendriers")
         variable = StringVar(self.window)
 
         listeCalendriers = self.service.calendarList().list().execute()
@@ -47,17 +51,20 @@ class GUI:
         for c in listeCalendriers['items']:
             #if c['summary'] not in ['Contacts', 'Jours fériés en France', 'Week Numbers']:
             self.nomEtIdCalendriers[c['summary']] = c['id']
+            logging.info("Ajout de: " + self.nomEtIdCalendriers[c['summary']] + " à la liste des calendriers")
 
         self.calendarsList = OptionMenu(self.window, variable, *(self.nomEtIdCalendriers.keys()), command = self.setSelectedID)
 
         self.calendarsList.pack(expand=True, fill=X)
 
     def setSelectedID(self, val):
+        logging.info("Calendrier choisi: " + val)
         self.selectedID = self.nomEtIdCalendriers[val]
         self.selectedName = val
-        print(val + ": " + self.selectedID)
+        #print(val + ": " + self.selectedID)
 
     def creeTabExport(self):
+        logging.info("Création de la fiche d'exportation")
         self.tabExport = ttk.Frame(self.tabs)
 
         # Date
@@ -91,9 +98,11 @@ class GUI:
     def selectSaveFolderAndName(self):
         filename = asksaveasfilename(title="Selectionner un fichier ICS", filetypes=(("iCalendar File", "*.ics"), ("All Files", "*.*")))
         self.filenameExport.delete(0, END)
+        logging.info("Nom du fichier ICS pour l'exportation: " + filename)
         self.filenameExport.insert(0, filename)
 
     def creeTabAjout(self):
+        logging.info("Création de la fiche d'ajout de fichier ICS")
         self.tabAdd = ttk.Frame(self.tabs)
 
         self.entryLine = ttk.Frame(self.tabAdd)
@@ -113,6 +122,7 @@ class GUI:
         self.tabs.add(self.tabAdd, text="Ajout")
 
     def creeTabView(self):
+        logging.info("Création de la fiche de visualisation des évènements")
         self.tabView = ttk.Frame(self.tabs)
 
         self.lineDateView = ttk.Frame(self.tabView)
@@ -154,7 +164,9 @@ class GUI:
         
 
     def askForICSFile(self):
+        logging.info("Demande de fichier ICS a importer")
         filename = askopenfilename(title="Selectionner un fichier ICS", filetypes=(("iCalendar File", "*.ics"), ("All Files", "*.*")))
+        logging.info("Lien du fichier a importer:" + filename)
         self.entryICSFile_Add.delete(0, END)
         self.entryICSFile_Add.insert(0, filename)
         self.buttonEventInFile['state'] = "normal"
@@ -174,9 +186,11 @@ class GUI:
         scrollbar.config( command = text.yview )
 
     def addICSFileToCalendar(self):
+        logging.info("Ajout du fichier ICS '" + self.entryICSFile_Add.get() + "' au calendrier: '" + self.selectedID + "'")
         add(self.service, self.selectedID, self.entryICSFile_Add.get())
 
     def exportData(self):
+        logging.info("Exportation des données dans le fichier: " + self.filenameExport.get())
         dateMinArray = self.dateDebutEntry.get()
         dateMaxArray = self.dateFinEntry.get()
 
