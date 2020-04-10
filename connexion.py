@@ -3,11 +3,12 @@ import datetime
 import pickle
 import os.path
 from GUI import GUI
-from tkinter import Tk, Label, Button, Entry, ttk, LEFT, X, BOTTOM, TOP, END, OptionMenu, StringVar, Event
+from tkinter import Tk, Label, Button, Entry, ttk, LEFT, X, BOTTOM, TOP, END, OptionMenu, StringVar, Event, messagebox
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from googleapiclient.discovery import build
-from oauth2client.client import OAuth2WebServerFlow
+from oauth2client.client import OAuth2WebServerFlow, FlowExchangeError
 import httplib2
+import logging
 
 CLIENT_ID = "39952552618-b8ef9glbnbmresq50e4e1c7smfb08bls.apps.googleusercontent.com"
 CLIENT_SECRET = "0gVxuIno5OPaSMmLiup2iLLt"
@@ -20,6 +21,7 @@ class GoogleConnexion:
 
     def createInterface(self):
         # Cree la fenêtre
+        logging.info("Création de l'interface graphique de la connexion")
         self.window = Tk()
         self.window.resizable(width=False, height=False)
         self.window.title("Connexion au service Google")
@@ -42,6 +44,7 @@ class GoogleConnexion:
         self.window.mainloop()
 
     def createComfirmNumberWindow(self, urlTxt):
+        logging.info("Création de la fenêtre de connexion Google")
         self.comfirmNumberWindow = Tk()
 
         # Code pour l'url
@@ -74,7 +77,9 @@ class GoogleConnexion:
         gui = GUI(self.service)
 
     def otherAccountConnexionGoogle(self):
-        os.remove('token.pickle')
+        logging.info("Déconnexion du compte Google enregistré")
+        if(self.hasToken()):
+            os.remove('token.pickle')
         self.connexionGoogle()
 
     @staticmethod
@@ -86,31 +91,36 @@ class GoogleConnexion:
         return os.remove('token.pickle')
 
     def validateCodeAndSaveToPickle(self):
+        logging.info("Validation du code...")
         code_auth = self.codeEntry.get()
-        creds = self.flow.step2_exchange(code=code_auth)
-        print("Access token:  {0}".format(creds.access_token))
-        print("Refresh token: {0}".format(creds.refresh_token))
+        try:
+            creds = self.flow.step2_exchange(code=code_auth)
+            # Save the credentials for the next run
+            with open('token.pickle', 'wb') as token:
+                pickle.dump(creds, token)
 
-        # Save the credentials for the next run
-        with open('token.pickle', 'wb') as token:
-            pickle.dump(creds, token)
-
-        self.service = build('calendar', 'v3', credentials=creds)
-        self.comfirmNumberWindow.destroy()
-        self.window.destroy()
-        g = GUI(self.service)
+            self.service = build('calendar', 'v3', credentials=creds)
+            self.comfirmNumberWindow.destroy()
+            self.window.destroy()
+            g = GUI(self.service)
+        except FlowExchangeError:
+            messagebox.showerror("Code invalide", "Le code entrée n'est pas un code valide")
+            logging.warning("Mauvais code de validation!")
 
     def connectToGoogle(self):
+        logging.info("Connexion au compte google")
         creds = None
         # The file token.pickle stores the user's access and refresh tokens, and is
         # created automatically when the authorization flow completes for the first
         # time.
         if os.path.exists('token.pickle'):
+            logging.info('Token de connexion trouvé')
             with open('token.pickle', 'rb') as token:
                 creds = pickle.load(token)
             self.service = build('calendar', 'v3', credentials=creds)
         # If there are no (valid) credentials available, let the user log in.
         else:
+            logging.info("Aucun token de connexion trouvé... Lancement de la procédure de connexion.")
             self.flow = OAuth2WebServerFlow(CLIENT_ID, CLIENT_SECRET, scope=SCOPES, redirect_uri="urn:ietf:wg:oauth:2.0:oob")
             flow_info = self.flow.step1_get_authorize_url()
             self.createComfirmNumberWindow(flow_info)
