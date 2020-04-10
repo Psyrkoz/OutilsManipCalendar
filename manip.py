@@ -3,6 +3,7 @@ import re
 from icalendar import Calendar, Event
 from datetime import datetime, timedelta
 from pytz import UTC # timezone
+import logging
 
 def removeMilliseconds(date):
     return re.sub("(\.\d{3,})", repl="", string=date)
@@ -56,60 +57,69 @@ def export(service, calendarName, calendarID, filename, dateMin = None, dateMax 
             data["end"]["dateTime"] = convertOffsetTimeToUTCGoogleFormat(e["end"]["dateTime"])
             textFile += templateDateTimeEvent.format(data)
     textFile += "END:VCALENDAR"
+
+    logging.info("Ajout des événements:\n" + textFile)
     with open(filename, "w") as file:
         file.write(textFile)
 
 def printEvent(filename):
-    g = open(filename,'rb')
-    gcal = Calendar.from_ical(g.read())
-    listEv=[]
-    i=0
-    for component in gcal.walk():
-        if component.name == "VEVENT":
-            text=""
-            i+=1
-            text+="\nEvènement n°" + str(i) + " :\n"
-            text+="\tRésumé : " + str(component.get('summary'))+"\n"
-            if len(str(component.get('dtstart').dt.isoformat())) == 10:
-                if (component.get('dtend').dt - component.get('dtstart').dt).days <= 1:
-                    text+="\tDébut : " + component.get('dtstart').dt.strftime("%d/%m/%Y")+"\n\tToute la journée\n"
+    try:
+        g = open(filename,'rb')
+        gcal = Calendar.from_ical(g.read())
+        listEv=[]
+        i=0
+        for component in gcal.walk():
+            if component.name == "VEVENT":
+                text=""
+                i+=1
+                text+="\nEvènement n°" + str(i) + " :\n"
+                text+="\tRésumé : " + str(component.get('summary'))+"\n"
+                if len(str(component.get('dtstart').dt.isoformat())) == 10:
+                    if (component.get('dtend').dt - component.get('dtstart').dt).days <= 1:
+                        text+="\tDébut : " + component.get('dtstart').dt.strftime("%d/%m/%Y")+"\n\tToute la journée\n"
+                    else:
+                        text+="\tDébut : " + component.get('dtstart').dt.strftime("%d/%m/%Y")+"\n"
+                        text+="\tFin : " + component.get('dtend').dt.strftime("%d/%m/%Y")+"\n"
                 else:
-                    text+="\tDébut : " + component.get('dtstart').dt.strftime("%d/%m/%Y")+"\n"
-                    text+="\tFin : " + component.get('dtend').dt.strftime("%d/%m/%Y")+"\n"
-            else:
-                text+="\tDébut : " + component.get('dtstart').dt.strftime("%d/%m/%Y, %H:%M")+"\n"
-                text+="\tFin : " + component.get('dtend').dt.strftime("%d/%m/%Y, %H:%M")+"\n"
-            listEv.append(text)
-    g.close()
-    return listEv
+                    text+="\tDébut : " + component.get('dtstart').dt.strftime("%d/%m/%Y, %H:%M")+"\n"
+                    text+="\tFin : " + component.get('dtend').dt.strftime("%d/%m/%Y, %H:%M")+"\n"
+                listEv.append(text)
+        g.close()
+        return listEv
+    except FileNotFoundError:
+        logging.error("Impossible d'ouvrir le fichier " + filename)
+        return ""
 
 def add(service, calendarID, filename):
-    g = open(filename,'rb')
-    gcal = Calendar.from_ical(g.read())
-    for component in gcal.walk():
-        event={}
-        if component.name == "VEVENT":
-            if component.get('summary') is not None:
-                event['summary']=str(component.get('summary'))
-            if component.get('location') is not None:
-                event['location']=str(component.get('location'))
-            if component.get('description') is not None:
-                event['description']=str(component.get('description'))
-            if len(str(component.get('dtstart').dt.isoformat())) == 10:
-                event['start']={'date':str(component.get('dtstart').dt.isoformat())}
-                event['end']={'date':str(component.get('dtend').dt.isoformat())}
-            else:
-                event['start']={'dateTime':str(component.get('dtstart').dt.isoformat())}
-                event['end']={'dateTime':str(component.get('dtend').dt.isoformat())}
-            if component.get('attendee') is not None:
-                event['attendees']=[]
-                if isinstance(component.get('attendee'), list):
-                    for a in component.get('attendee'):
-                        event['attendees'].append({'email':str(a).split(":")[1]})
+    try:    
+        g = open(filename,'rb')
+        gcal = Calendar.from_ical(g.read())
+        for component in gcal.walk():
+            event={}
+            if component.name == "VEVENT":
+                if component.get('summary') is not None:
+                    event['summary']=str(component.get('summary'))
+                if component.get('location') is not None:
+                    event['location']=str(component.get('location'))
+                if component.get('description') is not None:
+                    event['description']=str(component.get('description'))
+                if len(str(component.get('dtstart').dt.isoformat())) == 10:
+                    event['start']={'date':str(component.get('dtstart').dt.isoformat())}
+                    event['end']={'date':str(component.get('dtend').dt.isoformat())}
                 else:
-                    event['attendees'].append({'email':str(component.get('attendee')).split(":")[1]})
-            event = service.events().insert(calendarId=calendarID, body=event).execute()
-    g.close()
+                    event['start']={'dateTime':str(component.get('dtstart').dt.isoformat())}
+                    event['end']={'dateTime':str(component.get('dtend').dt.isoformat())}
+                if component.get('attendee') is not None:
+                    event['attendees']=[]
+                    if isinstance(component.get('attendee'), list):
+                        for a in component.get('attendee'):
+                            event['attendees'].append({'email':str(a).split(":")[1]})
+                    else:
+                        event['attendees'].append({'email':str(component.get('attendee')).split(":")[1]})
+                event = service.events().insert(calendarId=calendarID, body=event).execute()
+        g.close()
+    except FileNotFoundError:
+        logging.error("Impossible d'ouvrir le fichier " + filename)
 
 # date supposed YYYY-MM-DD; return DD/MM/YYYY
 def formatDate(date):
@@ -142,12 +152,22 @@ def getEvent(service, calendarID, dateMin = None, dateMax = None):
     dateEnd = None
 
     if(dateMin is not None and dateMin[0] != '' and dateMin[1] != '' and dateMin[2] != ''):
-        dateStart = datetime(day=int(dateMin[0]), month=int(dateMin[1]), year=int(dateMin[2]))
-        dateStart = dateStart.isoformat() + "Z"
-    
+        try:
+            dateStart = datetime(day=int(dateMin[0]), month=int(dateMin[1]), year=int(dateMin[2]))
+            dateStart = dateStart.isoformat() + "Z"
+        except ValueError:
+            logging.error("Date invalide, veuillez vérifier la date entrée")
+    else:
+        logging.warning("Date début non / mal rempli, aucune date de début ne sera prise en compte")
+
     if(dateMax is not None and dateMax[0] != '' and dateMax[1] != '' and dateMax[2] != ''):
-        dateEnd = datetime(day=int(dateMax[0]), month=int(dateMax[1]), year=int(dateMax[2]))
-        dateEnd = dateEnd.isoformat() + "Z"
+        try:
+            dateEnd = datetime(day=int(dateMax[0]), month=int(dateMax[1]), year=int(dateMax[2]))
+            dateEnd = dateEnd.isoformat() + "Z"
+        except ValueError:
+            logging.error("Date invalide, veuillez vérifier la date entrée")
+    else:
+        logging.warning("Date de fin non / mal rempli, aucune date de fin ne sera prise en compte")
 
     events_result = service.events().list(calendarId=calendarID, timeMin=dateStart,
                                             timeMax=dateEnd, singleEvents=True,
