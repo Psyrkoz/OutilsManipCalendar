@@ -46,6 +46,7 @@ class GoogleConnexion:
     def createComfirmNumberWindow(self, urlTxt):
         logging.info("Création de la fenêtre de connexion Google")
         self.comfirmNumberWindow = Tk()
+        self.comfirmNumberWindow.title("Authentification Google")
 
         # Code pour l'url
         frameUrl = ttk.Frame(self.comfirmNumberWindow)

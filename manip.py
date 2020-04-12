@@ -113,6 +113,8 @@ def add(service, calendarID, filename):
                     event['location']=str(component.get('location'))
                 if component.get('description') is not None:
                     event['description']=str(component.get('description'))
+                if component.get('sequence') is not None:
+                    event['sequence']=component.get('sequence')
                 if len(str(component.get('dtstart').dt.isoformat())) == 10:
                     event['start']={'date':str(component.get('dtstart').dt.isoformat())}
                     event['end']={'date':str(component.get('dtend').dt.isoformat())}

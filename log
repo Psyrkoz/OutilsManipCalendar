@@ -881,3 +881,62 @@ ImportError: file_cache is unavailable when using oauth2client >= 4.0.0 or googl
 2020-04-12 04:23:03,184 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/fr.french%23holiday%40group.v.calendar.google.com/events?alt=json
 2020-04-12 04:23:03,277 - WARNING - Encountered 403 Forbidden with reason "requiredAccessLevel"
 2020-04-12 04:23:03,278 - ERROR - Erreur d'importation de l'event n°2 du fichier C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/testfile.ics : <HttpError 403 when requesting https://www.googleapis.com/calendar/v3/calendars/fr.french%23holiday%40group.v.calendar.google.com/events?alt=json returned "You need to have writer access to this calendar.">
+2020-04-12 20:19:56,220 - INFO - Demarrage de l'application
+2020-04-12 20:19:56,221 - INFO - Création de l'interface graphique de la connexion
+2020-04-12 20:20:13,952 - INFO - Connexion au compte google
+2020-04-12 20:20:13,952 - INFO - Aucun token de connexion trouvé... Lancement de la procédure de connexion.
+2020-04-12 20:20:13,953 - INFO - Création de la fenêtre de connexion Google
+2020-04-12 20:20:41,882 - INFO - Validation du code...
+2020-04-12 20:20:42,054 - INFO - Successfully retrieved access token
+2020-04-12 20:20:42,077 - WARNING - file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 36, in autodetect
+    from google.appengine.api import memcache
+ModuleNotFoundError: No module named 'google.appengine'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 33, in <module>
+    from oauth2client.contrib.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.contrib.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 37, in <module>
+    from oauth2client.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 42, in autodetect
+    from . import file_cache
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 40, in <module>
+    raise ImportError(
+ImportError: file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+2020-04-12 20:20:42,078 - INFO - URL being requested: GET https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest
+2020-04-12 20:20:42,354 - INFO - Création de la fenêtre graphique principale
+2020-04-12 20:20:42,478 - INFO - Récupération de la liste des calendriers
+2020-04-12 20:20:42,481 - INFO - URL being requested: GET https://www.googleapis.com/calendar/v3/users/me/calendarList?alt=json
+2020-04-12 20:20:42,635 - INFO - Ajout de: svh2bd3b5r8f77bk37pqg3m450@group.calendar.google.com à la liste des calendriers
+2020-04-12 20:20:42,635 - INFO - Ajout de: compteprojetmiage@gmail.com à la liste des calendriers
+2020-04-12 20:20:42,635 - INFO - Ajout de: rieged3rkhfeoulcvt85mokpsk@group.calendar.google.com à la liste des calendriers
+2020-04-12 20:20:42,635 - INFO - Ajout de: addressbook#contacts@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 20:20:42,635 - INFO - Ajout de: fr.french#holiday@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 20:20:42,635 - INFO - Ajout de: e_2_fr#weeknum@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 20:20:42,639 - INFO - Création de la fiche de visualisation des évènements
+2020-04-12 20:20:42,641 - INFO - Création de la fiche d'ajout de fichier ICS
+2020-04-12 20:20:42,642 - INFO - Création de la fiche d'exportation
+2020-04-12 20:20:45,683 - INFO - Demande de fichier ICS a importer
+2020-04-12 20:20:47,131 - INFO - Lien du fichier a importer:C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/ADECal.ics
+2020-04-12 20:22:38,304 - INFO - Demarrage de l'application
+2020-04-12 20:22:38,305 - INFO - Création de l'interface graphique de la connexion
+2020-04-12 20:22:43,987 - INFO - Déconnexion du compte Google enregistré
+2020-04-12 20:22:44,028 - INFO - Connexion au compte google
+2020-04-12 20:22:44,029 - INFO - Aucun token de connexion trouvé... Lancement de la procédure de connexion.
+2020-04-12 20:22:44,029 - INFO - Création de la fenêtre de connexion Google
+2020-04-12 20:22:46,145 - INFO - Connexion au compte google
+2020-04-12 20:22:46,145 - INFO - Aucun token de connexion trouvé... Lancement de la procédure de connexion.
+2020-04-12 20:22:46,146 - INFO - Création de la fenêtre de connexion Google
