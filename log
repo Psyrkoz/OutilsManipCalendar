@@ -1,0 +1,883 @@
+2020-04-11 00:55:27,751 - INFO - Demarrage de l'application
+2020-04-11 00:55:27,763 - INFO - Création de l'interface graphique de la connexion
+2020-04-11 00:55:30,589 - INFO - Connexion au compte google
+2020-04-11 00:55:30,589 - INFO - Aucun token de connexion trouvé... Lancement de la procédure de connexion.
+2020-04-11 00:55:30,589 - INFO - Création de la fenêtre de connexion Google
+2020-04-11 00:55:59,134 - INFO - Validation du code...
+2020-04-11 00:56:01,065 - INFO - Successfully retrieved access token
+2020-04-11 00:56:01,237 - WARNING - file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 36, in autodetect
+    from google.appengine.api import memcache
+ModuleNotFoundError: No module named 'google.appengine'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 33, in <module>
+    from oauth2client.contrib.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.contrib.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 37, in <module>
+    from oauth2client.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 42, in autodetect
+    from . import file_cache
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 40, in <module>
+    raise ImportError(
+ImportError: file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+2020-04-11 00:56:01,262 - INFO - URL being requested: GET https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest
+2020-04-11 00:56:01,499 - INFO - Création de la fenêtre graphique principale
+2020-04-11 00:56:01,610 - INFO - Récupération de la liste des calendriers
+2020-04-11 00:56:01,612 - INFO - URL being requested: GET https://www.googleapis.com/calendar/v3/users/me/calendarList?alt=json
+2020-04-11 00:56:01,758 - INFO - Ajout de: svh2bd3b5r8f77bk37pqg3m450@group.calendar.google.com à la liste des calendriers
+2020-04-11 00:56:01,758 - INFO - Ajout de: compteprojetmiage@gmail.com à la liste des calendriers
+2020-04-11 00:56:01,758 - INFO - Ajout de: addressbook#contacts@group.v.calendar.google.com à la liste des calendriers
+2020-04-11 00:56:01,758 - INFO - Ajout de: fr.french#holiday@group.v.calendar.google.com à la liste des calendriers
+2020-04-11 00:56:01,758 - INFO - Ajout de: e_2_fr#weeknum@group.v.calendar.google.com à la liste des calendriers
+2020-04-11 00:56:01,764 - INFO - Création de la fiche de visualisation des évènements
+2020-04-11 00:56:01,766 - INFO - Création de la fiche d'ajout de fichier ICS
+2020-04-11 00:56:01,767 - INFO - Création de la fiche d'exportation
+2020-04-11 00:56:13,198 - INFO - Demande de fichier ICS a importer
+2020-04-11 00:56:17,771 - INFO - Lien du fichier a importer:C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/ADECal.ics
+2020-04-11 01:00:56,812 - INFO - Calendrier choisi: compteprojetmiage@gmail.com
+2020-04-11 01:01:04,592 - INFO - Ajout du fichier ICS 'C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/ADECal.ics' au calendrier: 'compteprojetmiage@gmail.com'
+2020-04-11 01:01:04,655 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:05,048 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:05,385 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:05,638 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:05,902 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:06,149 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:06,568 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:06,859 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:07,201 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:07,403 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:07,665 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:07,950 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:08,348 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:08,622 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:08,898 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:09,243 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:09,541 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:09,843 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:10,125 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:10,428 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:10,698 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:10,920 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:11,260 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:11,540 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:11,870 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:12,151 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:12,378 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:12,590 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:12,888 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:13,145 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:13,511 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:15,368 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:15,593 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:15,958 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:16,191 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:16,478 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:16,691 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:17,128 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:17,358 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:17,676 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:17,897 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:18,198 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:18,533 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:18,775 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:19,046 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:19,386 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:19,662 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:19,936 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:20,147 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:20,423 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:20,752 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:21,053 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:21,300 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:21,537 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:21,815 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:22,078 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:22,338 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:22,658 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:22,947 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:23,160 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:23,442 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:23,715 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:23,970 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:24,235 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:24,443 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:24,666 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:24,940 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:25,158 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:25,482 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:25,714 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:26,028 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:26,388 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:26,629 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:26,940 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:27,156 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:27,437 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:27,667 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:28,029 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:28,322 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:28,646 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:28,954 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:29,258 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:29,470 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:29,824 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:30,125 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:30,373 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:30,658 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:31,089 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:31,385 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 01:01:31,602 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-11 19:19:01,734 - INFO - Demarrage de l'application
+2020-04-11 19:19:01,761 - INFO - Création de l'interface graphique de la connexion
+2020-04-11 19:19:05,934 - INFO - Connexion au compte google
+2020-04-11 19:19:05,934 - INFO - Token de connexion trouvé
+2020-04-11 19:19:06,087 - WARNING - file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 36, in autodetect
+    from google.appengine.api import memcache
+ModuleNotFoundError: No module named 'google.appengine'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 33, in <module>
+    from oauth2client.contrib.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.contrib.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 37, in <module>
+    from oauth2client.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 42, in autodetect
+    from . import file_cache
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 40, in <module>
+    raise ImportError(
+ImportError: file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+2020-04-11 19:19:06,147 - INFO - URL being requested: GET https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest
+2020-04-11 19:19:06,954 - INFO - Création de la fenêtre graphique principale
+2020-04-11 19:19:07,060 - INFO - Récupération de la liste des calendriers
+2020-04-11 19:19:07,062 - INFO - URL being requested: GET https://www.googleapis.com/calendar/v3/users/me/calendarList?alt=json
+2020-04-11 19:19:07,163 - INFO - Refreshing due to a 401 (attempt 1/2)
+2020-04-11 19:19:07,164 - INFO - Refreshing access_token
+2020-04-11 19:19:07,428 - INFO - Ajout de: svh2bd3b5r8f77bk37pqg3m450@group.calendar.google.com à la liste des calendriers
+2020-04-11 19:19:07,429 - INFO - Ajout de: compteprojetmiage@gmail.com à la liste des calendriers
+2020-04-11 19:19:07,429 - INFO - Ajout de: addressbook#contacts@group.v.calendar.google.com à la liste des calendriers
+2020-04-11 19:19:07,429 - INFO - Ajout de: fr.french#holiday@group.v.calendar.google.com à la liste des calendriers
+2020-04-11 19:19:07,429 - INFO - Ajout de: e_2_fr#weeknum@group.v.calendar.google.com à la liste des calendriers
+2020-04-11 19:19:07,495 - INFO - Création de la fiche de visualisation des évènements
+2020-04-11 19:19:07,497 - INFO - Création de la fiche d'ajout de fichier ICS
+2020-04-11 19:19:07,499 - INFO - Création de la fiche d'exportation
+2020-04-11 19:19:11,162 - INFO - Demande de fichier ICS a importer
+2020-04-11 19:19:15,474 - INFO - Lien du fichier a importer:C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/ADECal.ics
+2020-04-11 19:19:49,727 - INFO - Demarrage de l'application
+2020-04-11 19:19:49,727 - INFO - Création de l'interface graphique de la connexion
+2020-04-11 19:19:51,824 - INFO - Connexion au compte google
+2020-04-11 19:19:51,824 - INFO - Token de connexion trouvé
+2020-04-11 19:19:51,827 - WARNING - file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 36, in autodetect
+    from google.appengine.api import memcache
+ModuleNotFoundError: No module named 'google.appengine'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 33, in <module>
+    from oauth2client.contrib.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.contrib.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 37, in <module>
+    from oauth2client.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 42, in autodetect
+    from . import file_cache
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 40, in <module>
+    raise ImportError(
+ImportError: file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+2020-04-11 19:19:51,828 - INFO - URL being requested: GET https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest
+2020-04-11 19:19:52,041 - INFO - Création de la fenêtre graphique principale
+2020-04-11 19:19:52,145 - INFO - Récupération de la liste des calendriers
+2020-04-11 19:19:52,147 - INFO - URL being requested: GET https://www.googleapis.com/calendar/v3/users/me/calendarList?alt=json
+2020-04-11 19:19:52,247 - INFO - Refreshing due to a 401 (attempt 1/2)
+2020-04-11 19:19:52,247 - INFO - Refreshing access_token
+2020-04-11 19:19:52,438 - INFO - Ajout de: svh2bd3b5r8f77bk37pqg3m450@group.calendar.google.com à la liste des calendriers
+2020-04-11 19:19:52,438 - INFO - Ajout de: compteprojetmiage@gmail.com à la liste des calendriers
+2020-04-11 19:19:52,438 - INFO - Ajout de: addressbook#contacts@group.v.calendar.google.com à la liste des calendriers
+2020-04-11 19:19:52,438 - INFO - Ajout de: fr.french#holiday@group.v.calendar.google.com à la liste des calendriers
+2020-04-11 19:19:52,438 - INFO - Ajout de: e_2_fr#weeknum@group.v.calendar.google.com à la liste des calendriers
+2020-04-11 19:19:52,445 - INFO - Création de la fiche de visualisation des évènements
+2020-04-11 19:19:52,447 - INFO - Création de la fiche d'ajout de fichier ICS
+2020-04-11 19:19:52,450 - INFO - Création de la fiche d'exportation
+2020-04-11 19:19:55,615 - INFO - Demande de fichier ICS a importer
+2020-04-11 19:19:57,349 - INFO - Lien du fichier a importer:C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/ADECal.ics
+2020-04-12 02:14:53,465 - INFO - Demarrage de l'application
+2020-04-12 02:14:53,465 - INFO - Création de l'interface graphique de la connexion
+2020-04-12 02:15:15,694 - INFO - Connexion au compte google
+2020-04-12 02:15:15,694 - INFO - Token de connexion trouvé
+2020-04-12 02:15:15,797 - WARNING - file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 36, in autodetect
+    from google.appengine.api import memcache
+ModuleNotFoundError: No module named 'google.appengine'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 33, in <module>
+    from oauth2client.contrib.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.contrib.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 37, in <module>
+    from oauth2client.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 42, in autodetect
+    from . import file_cache
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 40, in <module>
+    raise ImportError(
+ImportError: file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+2020-04-12 02:15:15,822 - INFO - URL being requested: GET https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest
+2020-04-12 02:15:16,123 - INFO - Création de la fenêtre graphique principale
+2020-04-12 02:15:16,233 - INFO - Récupération de la liste des calendriers
+2020-04-12 02:15:16,247 - INFO - URL being requested: GET https://www.googleapis.com/calendar/v3/users/me/calendarList?alt=json
+2020-04-12 02:15:16,340 - INFO - Refreshing due to a 401 (attempt 1/2)
+2020-04-12 02:15:16,340 - INFO - Refreshing access_token
+2020-04-12 02:15:16,568 - INFO - Ajout de: svh2bd3b5r8f77bk37pqg3m450@group.calendar.google.com à la liste des calendriers
+2020-04-12 02:15:16,568 - INFO - Ajout de: ucc0is2cdi7orbrnpmm8t10mf0@group.calendar.google.com à la liste des calendriers
+2020-04-12 02:15:16,568 - INFO - Ajout de: compteprojetmiage@gmail.com à la liste des calendriers
+2020-04-12 02:15:16,568 - INFO - Ajout de: addressbook#contacts@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 02:15:16,568 - INFO - Ajout de: fr.french#holiday@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 02:15:16,569 - INFO - Ajout de: e_2_fr#weeknum@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 02:15:16,595 - INFO - Création de la fiche de visualisation des évènements
+2020-04-12 02:15:16,601 - INFO - Création de la fiche d'ajout de fichier ICS
+2020-04-12 02:15:58,198 - INFO - Demarrage de l'application
+2020-04-12 02:15:58,198 - INFO - Création de l'interface graphique de la connexion
+2020-04-12 02:15:59,754 - INFO - Connexion au compte google
+2020-04-12 02:15:59,754 - INFO - Token de connexion trouvé
+2020-04-12 02:15:59,758 - WARNING - file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 36, in autodetect
+    from google.appengine.api import memcache
+ModuleNotFoundError: No module named 'google.appengine'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 33, in <module>
+    from oauth2client.contrib.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.contrib.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 37, in <module>
+    from oauth2client.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 42, in autodetect
+    from . import file_cache
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 40, in <module>
+    raise ImportError(
+ImportError: file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+2020-04-12 02:15:59,759 - INFO - URL being requested: GET https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest
+2020-04-12 02:16:00,177 - INFO - Création de la fenêtre graphique principale
+2020-04-12 02:16:00,268 - INFO - Récupération de la liste des calendriers
+2020-04-12 02:16:00,270 - INFO - URL being requested: GET https://www.googleapis.com/calendar/v3/users/me/calendarList?alt=json
+2020-04-12 02:16:00,363 - INFO - Refreshing due to a 401 (attempt 1/2)
+2020-04-12 02:16:00,363 - INFO - Refreshing access_token
+2020-04-12 02:16:00,641 - INFO - Ajout de: svh2bd3b5r8f77bk37pqg3m450@group.calendar.google.com à la liste des calendriers
+2020-04-12 02:16:00,642 - INFO - Ajout de: ucc0is2cdi7orbrnpmm8t10mf0@group.calendar.google.com à la liste des calendriers
+2020-04-12 02:16:00,642 - INFO - Ajout de: compteprojetmiage@gmail.com à la liste des calendriers
+2020-04-12 02:16:00,642 - INFO - Ajout de: addressbook#contacts@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 02:16:00,642 - INFO - Ajout de: fr.french#holiday@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 02:16:00,642 - INFO - Ajout de: e_2_fr#weeknum@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 02:16:00,650 - INFO - Création de la fiche de visualisation des évènements
+2020-04-12 02:16:00,652 - INFO - Création de la fiche d'ajout de fichier ICS
+2020-04-12 02:16:00,654 - INFO - Création de la fiche d'exportation
+2020-04-12 02:22:38,644 - INFO - Demarrage de l'application
+2020-04-12 02:22:38,644 - INFO - Création de l'interface graphique de la connexion
+2020-04-12 02:22:40,991 - INFO - Connexion au compte google
+2020-04-12 02:22:40,991 - INFO - Token de connexion trouvé
+2020-04-12 02:22:40,995 - WARNING - file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 36, in autodetect
+    from google.appengine.api import memcache
+ModuleNotFoundError: No module named 'google.appengine'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 33, in <module>
+    from oauth2client.contrib.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.contrib.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 37, in <module>
+    from oauth2client.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 42, in autodetect
+    from . import file_cache
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 40, in <module>
+    raise ImportError(
+ImportError: file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+2020-04-12 02:22:40,996 - INFO - URL being requested: GET https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest
+2020-04-12 02:22:41,178 - INFO - Création de la fenêtre graphique principale
+2020-04-12 02:22:41,262 - INFO - Récupération de la liste des calendriers
+2020-04-12 02:22:41,265 - INFO - URL being requested: GET https://www.googleapis.com/calendar/v3/users/me/calendarList?alt=json
+2020-04-12 02:22:41,362 - INFO - Refreshing due to a 401 (attempt 1/2)
+2020-04-12 02:22:41,363 - INFO - Refreshing access_token
+2020-04-12 02:22:41,593 - INFO - Ajout de: svh2bd3b5r8f77bk37pqg3m450@group.calendar.google.com à la liste des calendriers
+2020-04-12 02:22:41,594 - INFO - Ajout de: ucc0is2cdi7orbrnpmm8t10mf0@group.calendar.google.com à la liste des calendriers
+2020-04-12 02:22:41,594 - INFO - Ajout de: compteprojetmiage@gmail.com à la liste des calendriers
+2020-04-12 02:22:41,594 - INFO - Ajout de: addressbook#contacts@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 02:22:41,594 - INFO - Ajout de: fr.french#holiday@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 02:22:41,594 - INFO - Ajout de: e_2_fr#weeknum@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 02:22:41,600 - INFO - Création de la fiche de visualisation des évènements
+2020-04-12 02:22:41,602 - INFO - Création de la fiche d'ajout de fichier ICS
+2020-04-12 02:22:41,604 - INFO - Création de la fiche d'exportation
+2020-04-12 02:22:45,433 - INFO - Demande de fichier ICS a importer
+2020-04-12 02:22:55,397 - INFO - Lien du fichier a importer:C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/testfile.ics
+2020-04-12 02:23:42,632 - INFO - Calendrier choisi: Jours fériés en France
+2020-04-12 02:23:44,404 - INFO - Ajout du fichier ICS 'C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/testfile.ics' au calendrier: 'fr.french#holiday@group.v.calendar.google.com'
+2020-04-12 02:23:44,412 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/fr.french%23holiday%40group.v.calendar.google.com/events?alt=json
+2020-04-12 02:23:44,474 - WARNING - Encountered 403 Forbidden with reason "requiredAccessLevel"
+2020-04-12 02:23:56,205 - INFO - Calendrier choisi: compteprojetmiage@gmail.com
+2020-04-12 02:24:06,804 - INFO - Ajout du fichier ICS 'C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/testfile.ics' au calendrier: 'compteprojetmiage@gmail.com'
+2020-04-12 02:24:06,810 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-12 02:24:07,214 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/compteprojetmiage%40gmail.com/events?alt=json
+2020-04-12 02:24:26,564 - INFO - Demande de fichier ICS a importer
+2020-04-12 02:24:28,490 - INFO - Lien du fichier a importer:C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/ADECal.ics
+2020-04-12 02:24:32,729 - INFO - Calendrier choisi: M1Miage
+2020-04-12 02:24:35,453 - INFO - Calendrier choisi: Autre Test
+2020-04-12 02:24:43,333 - INFO - Ajout du fichier ICS 'C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/ADECal.ics' au calendrier: 'ucc0is2cdi7orbrnpmm8t10mf0@group.calendar.google.com'
+2020-04-12 02:24:43,379 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:43,627 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:43,930 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:44,231 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:44,466 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:44,688 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:44,961 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:45,225 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:45,417 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:45,694 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:45,995 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:46,254 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:46,521 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:46,814 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:47,114 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:47,314 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:47,588 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:47,867 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:48,080 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:48,364 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:48,675 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:48,940 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:49,230 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:49,628 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:49,960 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:50,247 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:50,521 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:50,711 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:51,007 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:51,455 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:51,660 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:51,869 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:52,093 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:52,291 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:52,497 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:52,717 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:52,999 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:53,215 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:53,566 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:53,853 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:54,135 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:54,360 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:54,644 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:54,953 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:55,143 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:55,375 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:55,670 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:55,858 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:56,087 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:56,281 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:56,535 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:56,729 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:56,937 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:57,251 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:57,469 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:57,730 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:58,129 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:58,358 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:58,566 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:58,839 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:59,102 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:59,365 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:59,569 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:24:59,899 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:00,186 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:00,465 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:00,773 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:00,995 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:01,273 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:01,559 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:01,767 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:02,053 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:02,327 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:02,612 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:02,884 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:03,206 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:03,484 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:03,702 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:04,014 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:04,300 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:04,507 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:04,952 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:05,171 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:05,363 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:05,766 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:06,118 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:06,390 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:06,826 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:07,040 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:25:07,229 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/ucc0is2cdi7orbrnpmm8t10mf0%40group.calendar.google.com/events?alt=json
+2020-04-12 02:48:33,967 - INFO - Demarrage de l'application
+2020-04-12 02:48:33,968 - INFO - Création de l'interface graphique de la connexion
+2020-04-12 02:48:42,186 - INFO - Connexion au compte google
+2020-04-12 02:48:42,187 - INFO - Token de connexion trouvé
+2020-04-12 02:48:42,193 - WARNING - file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 36, in autodetect
+    from google.appengine.api import memcache
+ModuleNotFoundError: No module named 'google.appengine'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 33, in <module>
+    from oauth2client.contrib.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.contrib.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 37, in <module>
+    from oauth2client.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 42, in autodetect
+    from . import file_cache
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 40, in <module>
+    raise ImportError(
+ImportError: file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+2020-04-12 02:48:42,194 - INFO - URL being requested: GET https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest
+2020-04-12 02:48:42,479 - INFO - Création de la fenêtre graphique principale
+2020-04-12 02:48:42,674 - INFO - Récupération de la liste des calendriers
+2020-04-12 02:48:42,677 - INFO - URL being requested: GET https://www.googleapis.com/calendar/v3/users/me/calendarList?alt=json
+2020-04-12 02:48:42,827 - INFO - Refreshing due to a 401 (attempt 1/2)
+2020-04-12 02:48:42,828 - INFO - Refreshing access_token
+2020-04-12 02:48:43,074 - INFO - Ajout de: svh2bd3b5r8f77bk37pqg3m450@group.calendar.google.com à la liste des calendriers
+2020-04-12 02:48:43,074 - INFO - Ajout de: compteprojetmiage@gmail.com à la liste des calendriers
+2020-04-12 02:48:43,075 - INFO - Ajout de: bg9b2gr4v66kp90sqkdvjacfn8@group.calendar.google.com à la liste des calendriers
+2020-04-12 02:48:43,075 - INFO - Ajout de: addressbook#contacts@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 02:48:43,075 - INFO - Ajout de: fr.french#holiday@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 02:48:43,075 - INFO - Ajout de: e_2_fr#weeknum@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 02:48:43,078 - INFO - Création de la fiche de visualisation des évènements
+2020-04-12 02:48:43,080 - INFO - Création de la fiche d'ajout de fichier ICS
+2020-04-12 02:48:43,083 - INFO - Création de la fiche d'exportation
+2020-04-12 02:48:57,504 - INFO - Demande de fichier ICS a importer
+2020-04-12 02:48:59,476 - INFO - Lien du fichier a importer:C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/ADECal.ics
+2020-04-12 02:49:06,052 - INFO - Calendrier choisi: Test
+2020-04-12 02:49:07,516 - INFO - Ajout du fichier ICS 'C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/ADECal.ics' au calendrier: 'bg9b2gr4v66kp90sqkdvjacfn8@group.calendar.google.com'
+2020-04-12 02:49:07,608 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:07,968 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:08,237 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:08,565 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:08,729 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:09,036 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:09,187 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:09,492 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:09,774 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:10,045 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:10,212 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:10,362 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:10,556 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:10,725 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:10,983 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:11,259 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:11,741 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:12,051 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:12,221 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:12,507 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:12,687 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:12,855 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:13,009 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:13,154 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:13,311 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:13,624 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:13,789 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:13,992 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:14,162 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:14,336 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:14,618 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:14,772 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:15,057 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:15,211 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:15,491 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:15,644 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:15,810 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:16,040 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:16,203 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:16,359 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:16,526 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:16,719 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:17,026 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:17,308 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:17,991 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:18,176 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:18,354 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:18,521 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:18,810 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:18,991 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:19,179 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:19,377 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:19,676 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:19,862 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:20,072 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:20,224 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:20,377 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:20,541 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:20,723 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:20,974 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:21,140 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:21,300 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:21,461 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:21,673 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:21,955 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:22,154 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:22,338 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:22,509 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:22,677 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:23,020 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:23,322 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:23,573 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:23,781 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:24,072 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:24,354 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:24,506 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:24,701 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:24,992 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:25,238 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:25,392 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:25,548 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:25,866 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:26,025 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:26,201 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:26,532 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:26,725 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:27,023 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:27,432 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:27,759 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 02:49:27,926 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/bg9b2gr4v66kp90sqkdvjacfn8%40group.calendar.google.com/events?alt=json
+2020-04-12 04:05:33,754 - INFO - Demarrage de l'application
+2020-04-12 04:05:33,754 - INFO - Création de l'interface graphique de la connexion
+2020-04-12 04:05:35,963 - INFO - Connexion au compte google
+2020-04-12 04:05:35,964 - INFO - Token de connexion trouvé
+2020-04-12 04:05:35,967 - WARNING - file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 36, in autodetect
+    from google.appengine.api import memcache
+ModuleNotFoundError: No module named 'google.appengine'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 33, in <module>
+    from oauth2client.contrib.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.contrib.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 37, in <module>
+    from oauth2client.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 42, in autodetect
+    from . import file_cache
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 40, in <module>
+    raise ImportError(
+ImportError: file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+2020-04-12 04:05:35,968 - INFO - URL being requested: GET https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest
+2020-04-12 04:05:36,158 - INFO - Création de la fenêtre graphique principale
+2020-04-12 04:05:36,247 - INFO - Récupération de la liste des calendriers
+2020-04-12 04:05:36,249 - INFO - URL being requested: GET https://www.googleapis.com/calendar/v3/users/me/calendarList?alt=json
+2020-04-12 04:05:36,349 - INFO - Refreshing due to a 401 (attempt 1/2)
+2020-04-12 04:05:36,349 - INFO - Refreshing access_token
+2020-04-12 04:05:36,677 - INFO - Ajout de: svh2bd3b5r8f77bk37pqg3m450@group.calendar.google.com à la liste des calendriers
+2020-04-12 04:05:36,677 - INFO - Ajout de: compteprojetmiage@gmail.com à la liste des calendriers
+2020-04-12 04:05:36,677 - INFO - Ajout de: rieged3rkhfeoulcvt85mokpsk@group.calendar.google.com à la liste des calendriers
+2020-04-12 04:05:36,677 - INFO - Ajout de: addressbook#contacts@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 04:05:36,678 - INFO - Ajout de: fr.french#holiday@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 04:05:36,678 - INFO - Ajout de: e_2_fr#weeknum@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 04:05:36,685 - INFO - Création de la fiche de visualisation des évènements
+2020-04-12 04:05:36,686 - INFO - Création de la fiche d'ajout de fichier ICS
+2020-04-12 04:05:36,688 - INFO - Création de la fiche d'exportation
+2020-04-12 04:05:39,186 - INFO - Demande de fichier ICS a importer
+2020-04-12 04:05:40,865 - INFO - Lien du fichier a importer:C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/testfile.ics
+2020-04-12 04:06:00,703 - INFO - Calendrier choisi: Jours fériés en France
+2020-04-12 04:06:06,795 - INFO - Ajout du fichier ICS 'C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/testfile.ics' au calendrier: 'fr.french#holiday@group.v.calendar.google.com'
+2020-04-12 04:06:06,804 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/fr.french%23holiday%40group.v.calendar.google.com/events?alt=json
+2020-04-12 04:06:06,898 - WARNING - Encountered 403 Forbidden with reason "requiredAccessLevel"
+2020-04-12 04:06:34,304 - INFO - Demarrage de l'application
+2020-04-12 04:06:34,305 - INFO - Création de l'interface graphique de la connexion
+2020-04-12 04:06:36,287 - INFO - Connexion au compte google
+2020-04-12 04:06:36,287 - INFO - Token de connexion trouvé
+2020-04-12 04:06:36,290 - WARNING - file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 36, in autodetect
+    from google.appengine.api import memcache
+ModuleNotFoundError: No module named 'google.appengine'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 33, in <module>
+    from oauth2client.contrib.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.contrib.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 37, in <module>
+    from oauth2client.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 42, in autodetect
+    from . import file_cache
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 40, in <module>
+    raise ImportError(
+ImportError: file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+2020-04-12 04:06:36,291 - INFO - URL being requested: GET https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest
+2020-04-12 04:06:36,737 - INFO - Création de la fenêtre graphique principale
+2020-04-12 04:06:36,833 - INFO - Récupération de la liste des calendriers
+2020-04-12 04:06:36,835 - INFO - URL being requested: GET https://www.googleapis.com/calendar/v3/users/me/calendarList?alt=json
+2020-04-12 04:06:36,942 - INFO - Refreshing due to a 401 (attempt 1/2)
+2020-04-12 04:06:36,942 - INFO - Refreshing access_token
+2020-04-12 04:06:37,157 - INFO - Ajout de: svh2bd3b5r8f77bk37pqg3m450@group.calendar.google.com à la liste des calendriers
+2020-04-12 04:06:37,157 - INFO - Ajout de: compteprojetmiage@gmail.com à la liste des calendriers
+2020-04-12 04:06:37,157 - INFO - Ajout de: rieged3rkhfeoulcvt85mokpsk@group.calendar.google.com à la liste des calendriers
+2020-04-12 04:06:37,157 - INFO - Ajout de: addressbook#contacts@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 04:06:37,157 - INFO - Ajout de: fr.french#holiday@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 04:06:37,157 - INFO - Ajout de: e_2_fr#weeknum@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 04:06:37,166 - INFO - Création de la fiche de visualisation des évènements
+2020-04-12 04:06:37,169 - INFO - Création de la fiche d'ajout de fichier ICS
+2020-04-12 04:06:37,171 - INFO - Création de la fiche d'exportation
+2020-04-12 04:06:39,255 - INFO - Demande de fichier ICS a importer
+2020-04-12 04:06:40,630 - INFO - Lien du fichier a importer:C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/testfile.ics
+2020-04-12 04:06:49,937 - INFO - Calendrier choisi: Jours fériés en France
+2020-04-12 04:06:53,806 - INFO - Ajout du fichier ICS 'C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/testfile.ics' au calendrier: 'fr.french#holiday@group.v.calendar.google.com'
+2020-04-12 04:06:53,815 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/fr.french%23holiday%40group.v.calendar.google.com/events?alt=json
+2020-04-12 04:06:53,934 - WARNING - Encountered 403 Forbidden with reason "requiredAccessLevel"
+2020-04-12 04:06:53,934 - ERROR - Erreur d'importation de l'event n°1 du fichier C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/testfile.ics : 
+Traceback (most recent call last):
+  File "C:\Users\USER\Videos\Universite\M1\Projet\OutilsManipCalendar\manip.py", line 130, in add
+    event = service.events().insert(calendarId=calendarID, body=event).execute()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\_helpers.py", line 134, in positional_wrapper
+    return wrapped(*args, **kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\http.py", line 898, in execute
+    raise HttpError(resp, content, uri=self.uri)
+googleapiclient.errors.HttpError: <HttpError 403 when requesting https://www.googleapis.com/calendar/v3/calendars/fr.french%23holiday%40group.v.calendar.google.com/events?alt=json returned "You need to have writer access to this calendar.">
+2020-04-12 04:06:53,941 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/fr.french%23holiday%40group.v.calendar.google.com/events?alt=json
+2020-04-12 04:06:54,006 - WARNING - Encountered 403 Forbidden with reason "requiredAccessLevel"
+2020-04-12 04:06:54,006 - ERROR - Erreur d'importation de l'event n°2 du fichier C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/testfile.ics : 
+Traceback (most recent call last):
+  File "C:\Users\USER\Videos\Universite\M1\Projet\OutilsManipCalendar\manip.py", line 130, in add
+    event = service.events().insert(calendarId=calendarID, body=event).execute()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\_helpers.py", line 134, in positional_wrapper
+    return wrapped(*args, **kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\http.py", line 898, in execute
+    raise HttpError(resp, content, uri=self.uri)
+googleapiclient.errors.HttpError: <HttpError 403 when requesting https://www.googleapis.com/calendar/v3/calendars/fr.french%23holiday%40group.v.calendar.google.com/events?alt=json returned "You need to have writer access to this calendar.">
+2020-04-12 04:10:31,691 - INFO - Demarrage de l'application
+2020-04-12 04:10:31,691 - INFO - Création de l'interface graphique de la connexion
+2020-04-12 04:10:36,648 - INFO - Connexion au compte google
+2020-04-12 04:10:36,648 - INFO - Token de connexion trouvé
+2020-04-12 04:10:36,651 - WARNING - file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 36, in autodetect
+    from google.appengine.api import memcache
+ModuleNotFoundError: No module named 'google.appengine'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 33, in <module>
+    from oauth2client.contrib.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.contrib.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 37, in <module>
+    from oauth2client.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 42, in autodetect
+    from . import file_cache
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 40, in <module>
+    raise ImportError(
+ImportError: file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+2020-04-12 04:10:36,652 - INFO - URL being requested: GET https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest
+2020-04-12 04:10:37,072 - INFO - Création de la fenêtre graphique principale
+2020-04-12 04:10:37,177 - INFO - Récupération de la liste des calendriers
+2020-04-12 04:10:37,179 - INFO - URL being requested: GET https://www.googleapis.com/calendar/v3/users/me/calendarList?alt=json
+2020-04-12 04:10:37,286 - INFO - Refreshing due to a 401 (attempt 1/2)
+2020-04-12 04:10:37,286 - INFO - Refreshing access_token
+2020-04-12 04:10:37,516 - INFO - Ajout de: svh2bd3b5r8f77bk37pqg3m450@group.calendar.google.com à la liste des calendriers
+2020-04-12 04:10:37,516 - INFO - Ajout de: compteprojetmiage@gmail.com à la liste des calendriers
+2020-04-12 04:10:37,516 - INFO - Ajout de: rieged3rkhfeoulcvt85mokpsk@group.calendar.google.com à la liste des calendriers
+2020-04-12 04:10:37,516 - INFO - Ajout de: addressbook#contacts@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 04:10:37,517 - INFO - Ajout de: fr.french#holiday@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 04:10:37,517 - INFO - Ajout de: e_2_fr#weeknum@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 04:10:37,524 - INFO - Création de la fiche de visualisation des évènements
+2020-04-12 04:10:37,526 - INFO - Création de la fiche d'ajout de fichier ICS
+2020-04-12 04:10:37,527 - INFO - Création de la fiche d'exportation
+2020-04-12 04:10:42,545 - INFO - Demande de fichier ICS a importer
+2020-04-12 04:10:51,131 - INFO - Lien du fichier a importer:C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/testfile.ics
+2020-04-12 04:10:54,460 - INFO - Calendrier choisi: Jours fériés en France
+2020-04-12 04:10:55,925 - INFO - Ajout du fichier ICS 'C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/testfile.ics' au calendrier: 'fr.french#holiday@group.v.calendar.google.com'
+2020-04-12 04:10:55,933 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/fr.french%23holiday%40group.v.calendar.google.com/events?alt=json
+2020-04-12 04:10:55,992 - WARNING - Encountered 403 Forbidden with reason "requiredAccessLevel"
+2020-04-12 04:10:55,992 - ERROR - Erreur d'importation de l'event n°1 du fichier C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/testfile.ics : 
+Traceback (most recent call last):
+  File "C:\Users\USER\Videos\Universite\M1\Projet\OutilsManipCalendar\manip.py", line 130, in add
+    event = service.events().insert(calendarId=calendarID, body=event).execute()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\_helpers.py", line 134, in positional_wrapper
+    return wrapped(*args, **kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\http.py", line 898, in execute
+    raise HttpError(resp, content, uri=self.uri)
+googleapiclient.errors.HttpError: <HttpError 403 when requesting https://www.googleapis.com/calendar/v3/calendars/fr.french%23holiday%40group.v.calendar.google.com/events?alt=json returned "You need to have writer access to this calendar.">
+2020-04-12 04:10:55,998 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/fr.french%23holiday%40group.v.calendar.google.com/events?alt=json
+2020-04-12 04:10:56,079 - WARNING - Encountered 403 Forbidden with reason "requiredAccessLevel"
+2020-04-12 04:10:56,079 - ERROR - Erreur d'importation de l'event n°2 du fichier C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/testfile.ics : 
+Traceback (most recent call last):
+  File "C:\Users\USER\Videos\Universite\M1\Projet\OutilsManipCalendar\manip.py", line 130, in add
+    event = service.events().insert(calendarId=calendarID, body=event).execute()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\_helpers.py", line 134, in positional_wrapper
+    return wrapped(*args, **kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\http.py", line 898, in execute
+    raise HttpError(resp, content, uri=self.uri)
+googleapiclient.errors.HttpError: <HttpError 403 when requesting https://www.googleapis.com/calendar/v3/calendars/fr.french%23holiday%40group.v.calendar.google.com/events?alt=json returned "You need to have writer access to this calendar.">
+2020-04-12 04:11:05,667 - INFO - Calendrier choisi: Test
+2020-04-12 04:11:07,502 - INFO - Ajout du fichier ICS 'C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/testfile.ics' au calendrier: 'rieged3rkhfeoulcvt85mokpsk@group.calendar.google.com'
+2020-04-12 04:11:07,508 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/rieged3rkhfeoulcvt85mokpsk%40group.calendar.google.com/events?alt=json
+2020-04-12 04:11:08,078 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/rieged3rkhfeoulcvt85mokpsk%40group.calendar.google.com/events?alt=json
+2020-04-12 04:22:51,022 - INFO - Demarrage de l'application
+2020-04-12 04:22:51,023 - INFO - Création de l'interface graphique de la connexion
+2020-04-12 04:22:52,943 - INFO - Connexion au compte google
+2020-04-12 04:22:52,944 - INFO - Token de connexion trouvé
+2020-04-12 04:22:52,947 - WARNING - file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 36, in autodetect
+    from google.appengine.api import memcache
+ModuleNotFoundError: No module named 'google.appengine'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 33, in <module>
+    from oauth2client.contrib.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.contrib.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 37, in <module>
+    from oauth2client.locked_file import LockedFile
+ModuleNotFoundError: No module named 'oauth2client.locked_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\__init__.py", line 42, in autodetect
+    from . import file_cache
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python38-32\lib\site-packages\googleapiclient\discovery_cache\file_cache.py", line 40, in <module>
+    raise ImportError(
+ImportError: file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+2020-04-12 04:22:52,948 - INFO - URL being requested: GET https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest
+2020-04-12 04:22:53,183 - INFO - Création de la fenêtre graphique principale
+2020-04-12 04:22:53,278 - INFO - Récupération de la liste des calendriers
+2020-04-12 04:22:53,280 - INFO - URL being requested: GET https://www.googleapis.com/calendar/v3/users/me/calendarList?alt=json
+2020-04-12 04:22:53,377 - INFO - Refreshing due to a 401 (attempt 1/2)
+2020-04-12 04:22:53,377 - INFO - Refreshing access_token
+2020-04-12 04:22:53,586 - INFO - Ajout de: svh2bd3b5r8f77bk37pqg3m450@group.calendar.google.com à la liste des calendriers
+2020-04-12 04:22:53,586 - INFO - Ajout de: compteprojetmiage@gmail.com à la liste des calendriers
+2020-04-12 04:22:53,586 - INFO - Ajout de: rieged3rkhfeoulcvt85mokpsk@group.calendar.google.com à la liste des calendriers
+2020-04-12 04:22:53,587 - INFO - Ajout de: addressbook#contacts@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 04:22:53,587 - INFO - Ajout de: fr.french#holiday@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 04:22:53,587 - INFO - Ajout de: e_2_fr#weeknum@group.v.calendar.google.com à la liste des calendriers
+2020-04-12 04:22:53,595 - INFO - Création de la fiche de visualisation des évènements
+2020-04-12 04:22:53,599 - INFO - Création de la fiche d'ajout de fichier ICS
+2020-04-12 04:22:53,600 - INFO - Création de la fiche d'exportation
+2020-04-12 04:22:57,160 - INFO - Calendrier choisi: Jours fériés en France
+2020-04-12 04:22:58,969 - INFO - Demande de fichier ICS a importer
+2020-04-12 04:23:01,693 - INFO - Lien du fichier a importer:C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/testfile.ics
+2020-04-12 04:23:02,992 - INFO - Ajout du fichier ICS 'C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/testfile.ics' au calendrier: 'fr.french#holiday@group.v.calendar.google.com'
+2020-04-12 04:23:03,119 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/fr.french%23holiday%40group.v.calendar.google.com/events?alt=json
+2020-04-12 04:23:03,180 - WARNING - Encountered 403 Forbidden with reason "requiredAccessLevel"
+2020-04-12 04:23:03,180 - ERROR - Erreur d'importation de l'event n°1 du fichier C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/testfile.ics : <HttpError 403 when requesting https://www.googleapis.com/calendar/v3/calendars/fr.french%23holiday%40group.v.calendar.google.com/events?alt=json returned "You need to have writer access to this calendar.">
+2020-04-12 04:23:03,184 - INFO - URL being requested: POST https://www.googleapis.com/calendar/v3/calendars/fr.french%23holiday%40group.v.calendar.google.com/events?alt=json
+2020-04-12 04:23:03,277 - WARNING - Encountered 403 Forbidden with reason "requiredAccessLevel"
+2020-04-12 04:23:03,278 - ERROR - Erreur d'importation de l'event n°2 du fichier C:/Users/USER/Videos/Universite/M1/Projet/OutilsManipCalendar/testfile.ics : <HttpError 403 when requesting https://www.googleapis.com/calendar/v3/calendars/fr.french%23holiday%40group.v.calendar.google.com/events?alt=json returned "You need to have writer access to this calendar.">

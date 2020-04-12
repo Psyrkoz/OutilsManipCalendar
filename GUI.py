@@ -1,4 +1,4 @@
-from tkinter import Tk, Label, Button, Entry, ttk, RIGHT, LEFT, X, Y, BOTTOM, TOP, END, BOTH, OptionMenu, StringVar, Event, Text, Scrollbar
+from tkinter import Tk, messagebox, Label, Button, Entry, ttk, RIGHT, LEFT, X, Y, BOTTOM, HORIZONTAL, TOP, END, BOTH, OptionMenu, StringVar, Event, Text, Scrollbar, ttk
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from DateEntry import DateEntry
 from manip import export, add, printEvent, getEvent
@@ -111,7 +111,6 @@ class GUI:
         self.buttonAskICSFile_Add = Button(self.entryLine, text = "...", command = self.askForICSFile)
         self.buttonEventInFile = Button(self.tabAdd, text = "Visualiser", state = "disabled", command = self.openEvent)
         self.buttonAjouter = Button(self.tabAdd, text = "Ajouter", command = self.addICSFileToCalendar)
-
         self.labelAskICSFile_Add.pack(side=LEFT)
         self.entryICSFile_Add.pack(expand=True, fill=X, side=LEFT)
         self.buttonAskICSFile_Add.pack(side=LEFT)
@@ -187,7 +186,13 @@ class GUI:
 
     def addICSFileToCalendar(self):
         logging.info("Ajout du fichier ICS '" + self.entryICSFile_Add.get() + "' au calendrier: '" + self.selectedID + "'")
-        add(self.service, self.selectedID, self.entryICSFile_Add.get())
+        self.buttonAjouter['state'] = "disabled"
+        importation = add(self.service, self.selectedID, self.entryICSFile_Add.get())
+        self.buttonAjouter['state'] = "normal"
+        if importation["successful"]:
+            messagebox.showinfo(title="Importation", message=importation["message"])
+        else:
+            messagebox.showerror(title="Importation", message=importation["message"])
 
     def exportData(self):
         logging.info("Exportation des données dans le fichier: " + self.filenameExport.get())
