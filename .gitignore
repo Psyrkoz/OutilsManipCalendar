@@ -130,3 +130,6 @@ dmypy.json
 
 # Pickle file
 .pickle
+
+# Log file from the app
+log
