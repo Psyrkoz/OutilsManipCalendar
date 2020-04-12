@@ -68,6 +68,11 @@ def printEvent(filename):
         gcal = Calendar.from_ical(g.read())
         listEv=[]
         i=0
+        nbEvent = 0
+        for composant in gcal.walk():
+            if composant.name == "VEVENT":
+                nbEvent+=1
+        listEv.append("Nombre d'event : " + str(nbEvent) + "\n")
         for component in gcal.walk():
             if component.name == "VEVENT":
                 text=""
@@ -95,15 +100,21 @@ def add(service, calendarID, filename):
     try:    
         g = open(filename,'rb')
         gcal = Calendar.from_ical(g.read())
+        successful = True
+        message = "Importation réussite"
+        i=0
         for component in gcal.walk():
             event={}
             if component.name == "VEVENT":
+                i+=1
                 if component.get('summary') is not None:
                     event['summary']=str(component.get('summary'))
                 if component.get('location') is not None:
                     event['location']=str(component.get('location'))
                 if component.get('description') is not None:
                     event['description']=str(component.get('description'))
+                if component.get('sequence') is not None:
+                    event['sequence']=component.get('sequence')
                 if len(str(component.get('dtstart').dt.isoformat())) == 10:
                     event['start']={'date':str(component.get('dtstart').dt.isoformat())}
                     event['end']={'date':str(component.get('dtend').dt.isoformat())}
@@ -117,10 +128,17 @@ def add(service, calendarID, filename):
                             event['attendees'].append({'email':str(a).split(":")[1]})
                     else:
                         event['attendees'].append({'email':str(component.get('attendee')).split(":")[1]})
-                event = service.events().insert(calendarId=calendarID, body=event).execute()
+                try:
+                    event = service.events().insert(calendarId=calendarID, body=event).execute()
+                except Exception as e:
+                    logging.error("Erreur d'importation de l'event n°"+ str(i) + " du fichier "+ filename +" : "+ str(e))
+                    successful = False
+                    message = "Une erreur est survenu. Visitez les logs"
         g.close()
+        return {'successful': successful, 'message': message }
     except FileNotFoundError:
         logging.error("Impossible d'ouvrir le fichier " + filename)
+        return {'successful': False, 'message': "Une erreur est survenu. Visitez les logs" }
 
 # date supposed YYYY-MM-DD; return DD/MM/YYYY
 def formatDate(date):
