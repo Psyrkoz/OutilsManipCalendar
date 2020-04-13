@@ -49,9 +49,9 @@ class GUI:
         listeCalendriers = self.service.calendarList().list().execute()
         self.nomEtIdCalendriers = dict()
         for c in listeCalendriers['items']:
-            #if c['summary'] not in ['Contacts', 'Jours fériés en France', 'Week Numbers']:
-            self.nomEtIdCalendriers[c['summary']] = c['id']
-            logging.info("Ajout de: " + self.nomEtIdCalendriers[c['summary']] + " à la liste des calendriers")
+            if c["accessRole"] in ["owner", "writer"]: # Il faut avoir les droits de lecteur ET d'écriture
+                self.nomEtIdCalendriers[c['summary']] = c['id']
+                logging.info("Ajout de: " + self.nomEtIdCalendriers[c['summary']] + " à la liste des calendriers")
 
         self.calendarsList = OptionMenu(self.window, variable, *(self.nomEtIdCalendriers.keys()), command = self.setSelectedID)
 
