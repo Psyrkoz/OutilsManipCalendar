@@ -37,10 +37,10 @@ class GoogleConnexion:
         self.button = Button(self.window, text=textButton, command = self.connexionGoogle)
 
         # Ajoute les boutons dans la fenêtre et lance la boucle
-        self.connexionTexte.pack()
-        self.button.pack()
+        self.connexionTexte.pack(expand = True, fill = X)
+        self.button.pack(expand = True, fill = X)
         if(self.buttonDisconnect is not None):
-            self.buttonDisconnect.pack()
+            self.buttonDisconnect.pack(expand = True, fill = X)
         self.window.mainloop()
 
     def createComfirmNumberWindow(self, urlTxt):

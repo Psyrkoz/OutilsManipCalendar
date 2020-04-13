@@ -1,9 +1,10 @@
-from tkinter import Tk, messagebox, Label, Button, Entry, ttk, RIGHT, LEFT, X, Y, BOTTOM, HORIZONTAL, TOP, END, BOTH, OptionMenu, StringVar, Event, Text, Scrollbar, ttk
+from tkinter import Tk, messagebox, Label, Button, Entry, ttk, RIGHT, LEFT, X, Y, BOTTOM, HORIZONTAL, TOP, END, BOTH, OptionMenu, StringVar, Event, Text, Scrollbar, ttk, messagebox
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from DateEntry import DateEntry
-from manip import export, add, printEvent, getEvent
+from manip import export, add, empty, printEvent, getEvent
 import connexion
 import logging
+import os
 
 class GUI:
     def __init__(self, service):
@@ -27,12 +28,11 @@ class GUI:
         self.creeTabView()
         self.creeTabAjout()
         self.creeTabExport()
-        self.disconnectButton = Button(self.window, text = "Déconnexion", command = self.disconnect)
+        self.creeTabOption()
         self.exitButton = Button(self.window, text = "Quitter l'application", command = self.window.destroy)
         
         self.tabs.pack(expand=1, fill='both')
         self.tabs.bind("<<NotebookTabChanged>>", self.resizeTab)
-        self.disconnectButton.pack(expand=1, fill=X)
         self.exitButton.pack(expand=1, fill=X)
         self.window.mainloop()
 
@@ -94,7 +94,29 @@ class GUI:
         self.lineFile.pack(expand=True, fill=X)
         self.buttonExport.pack(expand=True, fill=X)  
         self.tabs.add(self.tabExport, text="Exportation")
-        
+
+    def emptyCalendar(self):
+        messagebox.showinfo("Suppression des données", "La suppression va commencer après avoir appuyer sur 'Ok'")
+        empty(self.service, self.selectedID)
+        messagebox.showinfo("Suppression des données", "Les données ont été supprimées")
+
+    def emptyLog(self):
+        if(os.path.exists("log")):
+            os.remove("log")
+
+    def creeTabOption(self):
+        logging.info("Création de la fiche des options")
+        self.tabOption = ttk.Frame(self.tabs)
+
+        self.btnEmptyCalendar = Button(self.tabOption, text = "Vider calendrier", command = self.emptyCalendar)
+        self.btnEmptyLog = Button(self.tabOption, text = "Vider le fichier de log", command = self.emptyLog)
+        self.btnDisconnect = Button(self.tabOption, text = "Déconnexion", command = self.disconnect)
+
+        self.btnEmptyCalendar.pack(expand = True, fill = X)
+        self.btnEmptyLog.pack(expand = True, fill = X)
+        self.btnDisconnect.pack(expand = True, fill = X)
+        self.tabs.add(self.tabOption, text = "Options")
+
     def selectSaveFolderAndName(self):
         filename = asksaveasfilename(title="Selectionner un fichier ICS", filetypes=(("iCalendar File", "*.ics"), ("All Files", "*.*")))
         self.filenameExport.delete(0, END)

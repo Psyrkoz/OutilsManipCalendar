@@ -234,3 +234,11 @@ def getEvent(service, calendarID, dateMin = None, dateMax = None):
         
     return listEv
 
+def empty(service, calendarID):
+    events_result = service.events().list(calendarId=calendarID, timeMin=None,
+                                            timeMax=None, singleEvents=True,
+                                            orderBy='startTime').execute()
+    events = events_result.get('items', [])
+    for e in events:
+        logging.warning("Suppression de: " + e["id"] + " sur le calendrier " + calendarID)
+        service.events().delete(calendarId=calendarID, eventId = e["id"]).execute()
