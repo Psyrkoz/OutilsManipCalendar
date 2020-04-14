@@ -9,6 +9,7 @@ from googleapiclient.discovery import build
 from oauth2client.client import OAuth2WebServerFlow, FlowExchangeError
 import httplib2
 import logging
+import webbrowser
 
 CLIENT_ID = "39952552618-b8ef9glbnbmresq50e4e1c7smfb08bls.apps.googleusercontent.com"
 CLIENT_SECRET = "0gVxuIno5OPaSMmLiup2iLLt"
@@ -50,9 +51,11 @@ class GoogleConnexion:
 
         # Code pour l'url
         frameUrl = ttk.Frame(self.comfirmNumberWindow)
-        labelUrl = Label(frameUrl, text="Lien de connexion:")
-        url = Entry(frameUrl, width=50)
+        labelUrl = Label(frameUrl, text="Cliquer sur ce lien ou copier le et lancer votre navigateur:")
+        url = Entry(frameUrl, width=50, fg="blue", bg=self.window.cget("bg"))
         url.insert(0, urlTxt)
+        url.configure(state="readonly")
+        url.bind("<Button-1>", lambda e: webbrowser.open_new(urlTxt))
         labelUrl.pack(side=LEFT)
         url.pack(side=LEFT)
 
@@ -64,7 +67,7 @@ class GoogleConnexion:
         self.codeEntry.pack(side=LEFT)
 
         # Code pour le bouton
-        btnComfirm = Button(self.comfirmNumberWindow, text="Valider le code", command = self.validateCodeAndSaveToPickle)
+        btnComfirm = Button(self.comfirmNumberWindow, text = "Valider le code", command = self.validateCodeAndSaveToPickle)
 
         frameUrl.pack()
         frameCode.pack()
