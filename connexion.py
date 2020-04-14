@@ -139,7 +139,10 @@ class GoogleConnexion:
             os.remove(name + '.pickle')
 
     def validateCodeAndSaveToPickle(self, name):
-        print("Name: " + name)
+        if(name == ''):
+            messagebox.showinfo("Nom", "Vous devez donner un nom a ce compte")
+            return
+            
         logging.info("Validation du code...")
         code_auth = self.codeEntry.get()
         try:
