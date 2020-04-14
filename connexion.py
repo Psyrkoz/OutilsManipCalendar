@@ -44,6 +44,14 @@ class GoogleConnexion:
             self.buttonDisconnect.pack(expand = True, fill = X)
         self.window.mainloop()
 
+    def copyUrlInClipBoard(self, urlTxt):
+        self.window.withdraw()
+        self.window.clipboard_clear()
+        self.window.clipboard_append(urlTxt)
+        self.window.update()
+
+        messagebox.showinfo("Information", "Le lien a bien été copié dans le presse papier")
+
     def createComfirmNumberWindow(self, urlTxt):
         logging.info("Création de la fenêtre de connexion Google")
         self.comfirmNumberWindow = Tk()
@@ -51,13 +59,17 @@ class GoogleConnexion:
 
         # Code pour l'url
         frameUrl = ttk.Frame(self.comfirmNumberWindow)
-        labelUrl = Label(frameUrl, text="Cliquer sur ce lien ou copier le et lancer votre navigateur:")
+        labelUrl = Label(frameUrl, text="Lien cliquable:")
         url = Entry(frameUrl, width=50, fg="blue", bg=self.window.cget("bg"))
         url.insert(0, urlTxt)
         url.configure(state="readonly")
         url.bind("<Button-1>", lambda e: webbrowser.open_new(urlTxt))
+
+        btnCopy = Button(frameUrl, text = "Copier le lien", command = lambda: self.copyUrlInClipBoard(urlTxt))
+
         labelUrl.pack(side=LEFT)
         url.pack(side=LEFT)
+        btnCopy.pack(side=LEFT)
 
         # Code pour le code
         frameCode = ttk.Frame(self.comfirmNumberWindow)
