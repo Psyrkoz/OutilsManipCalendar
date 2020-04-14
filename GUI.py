@@ -36,10 +36,9 @@ class GUI:
         self.exitButton.pack(expand=1, fill=X)
         self.window.mainloop()
 
-    def disconnect(self):
-        logging.info("Déconnexion du compte google")
+    def changeAccount(self):
+        logging.info("Changement de compte google")
         self.window.destroy()
-        connexion.GoogleConnexion.deleteToken()
         g = connexion.GoogleConnexion()
 
     def creeListeCalendrier(self):
@@ -110,11 +109,11 @@ class GUI:
 
         self.btnEmptyCalendar = Button(self.tabOption, text = "Vider calendrier", command = self.emptyCalendar)
         self.btnEmptyLog = Button(self.tabOption, text = "Vider le fichier de log", command = self.emptyLog)
-        self.btnDisconnect = Button(self.tabOption, text = "Déconnexion", command = self.disconnect)
+        self.btnChangeAccount = Button(self.tabOption, text = "Changement de compte", command = self.changeAccount)
 
         self.btnEmptyCalendar.pack(expand = True, fill = X)
         self.btnEmptyLog.pack(expand = True, fill = X)
-        self.btnDisconnect.pack(expand = True, fill = X)
+        self.btnChangeAccount.pack(expand = True, fill = X)
         self.tabs.add(self.tabOption, text = "Options")
 
     def selectSaveFolderAndName(self):
