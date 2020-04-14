@@ -3,7 +3,7 @@ import datetime
 import pickle
 import os.path
 from GUI import GUI
-from tkinter import Tk, Label, Button, Entry, ttk, LEFT, X, BOTTOM, TOP, END, OptionMenu, StringVar, Event, messagebox
+from tkinter import Tk, Label, Button, Entry, ttk, LEFT, X, BOTTOM, TOP, END, OptionMenu, StringVar, Event, messagebox, Listbox, END
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from googleapiclient.discovery import build
 from oauth2client.client import OAuth2WebServerFlow, FlowExchangeError
@@ -21,6 +21,7 @@ class GoogleConnexion:
         self.createInterface()
 
     def createInterface(self):
+        #self.createInterfaceSelectionCompte()
         # Cree la fenêtre
         logging.info("Création de l'interface graphique de la connexion")
         self.window = Tk()
@@ -28,21 +29,55 @@ class GoogleConnexion:
         self.window.title("Connexion au service Google")
         self.connexionTexte = Label(self.window, text="Une connexion au service Google est nécessaire!")
 
-        self.buttonDisconnect = None
-        if(GoogleConnexion.hasToken()):
-            textButton = "Connexion en utilisant le token"
-            self.buttonDisconnect = Button(self.window, text="Connection a un autre compte Google", command = self.otherAccountConnexionGoogle)
-        else:
-            textButton = "Connexion a un compte Google"
+        self.button = None
+        self.buttonAddAccount = None
+        if(GoogleConnexion.getAllTokens()):
+            textButton = "Connexion a un compte enregistré"
+            self.button = Button(self.window, text=textButton, command = self.createManageAccountInterface)
+        
+        self.buttonAddAccount = Button(self.window, text="Ajouter un compte Google", command = self.createAddAccountInterface)
 
-        self.button = Button(self.window, text=textButton, command = self.connexionGoogle)
+        
 
         # Ajoute les boutons dans la fenêtre et lance la boucle
         self.connexionTexte.pack(expand = True, fill = X)
-        self.button.pack(expand = True, fill = X)
-        if(self.buttonDisconnect is not None):
-            self.buttonDisconnect.pack(expand = True, fill = X)
+        if(self.button is not None):
+            self.button.pack(expand = True, fill = X)
+        self.buttonAddAccount.pack(expand = True, fill = X)
         self.window.mainloop()
+
+    def createManageAccountInterface(self):
+        self.selectionCompte = Tk()
+        self.selectionCompte.title("Sélection du compte")
+        self.listeCompte = Listbox(self.selectionCompte, selectmode = "single")
+        self.listeCompte.insert(0, *GoogleConnexion.getAllTokens())
+        self.listeCompte.pack(expand=True, fill=X)
+
+        btnConnectWithThisPickle = Button(self.selectionCompte, text = "Se connecter avec se compte", command = lambda: self.connexionGoogle(self.listeCompte.get(self.listeCompte.curselection())))
+        btnConnectWithThisPickle.pack(expand=True, fill=X)
+        
+        btnDisconnectThisPickle = Button(self.selectionCompte, text = "Déconnecter ce compte", command = self.deleteTokenAndRefreshList)
+        btnDisconnectThisPickle.pack(expand=True, fill=X)
+
+        self.selectionCompte.mainloop()
+    
+    def deleteTokenAndRefreshList(self):
+        GoogleConnexion.deleteToken(self.listeCompte.get(self.listeCompte.curselection()))
+        self.listeCompte.delete(0, END)
+        self.listeCompte.insert(0, *GoogleConnexion.getAllTokens())
+
+    def createAddAccountInterface(self):
+        self.flow = OAuth2WebServerFlow(CLIENT_ID, CLIENT_SECRET, scope=SCOPES, redirect_uri="urn:ietf:wg:oauth:2.0:oob")
+        flow_info = self.flow.step1_get_authorize_url()
+        self.createComfirmNumberWindow(flow_info)
+
+    def copyUrlInClipBoard(self, urlTxt):
+        self.window.withdraw()
+        self.window.clipboard_clear()
+        self.window.clipboard_append(urlTxt)
+        self.window.update()
+
+        messagebox.showinfo("Information", "Le lien a bien été copié dans le presse papier")
 
     def createComfirmNumberWindow(self, urlTxt):
         logging.info("Création de la fenêtre de connexion Google")
@@ -51,83 +86,86 @@ class GoogleConnexion:
 
         # Code pour l'url
         frameUrl = ttk.Frame(self.comfirmNumberWindow)
-        labelUrl = Label(frameUrl, text="Cliquer sur ce lien ou copier le et lancer votre navigateur:")
+        labelUrl = Label(frameUrl, text="Lien cliquable:")
         url = Entry(frameUrl, width=50, fg="blue", bg=self.window.cget("bg"))
         url.insert(0, urlTxt)
         url.configure(state="readonly")
         url.bind("<Button-1>", lambda e: webbrowser.open_new(urlTxt))
+
+        btnCopy = Button(frameUrl, text = "Copier le lien", command = lambda: self.copyUrlInClipBoard(urlTxt))
+
         labelUrl.pack(side=LEFT)
         url.pack(side=LEFT)
+        btnCopy.pack(side=LEFT)
+
+        # Code pour le nom du compte
+        frameName = ttk.Frame(self.comfirmNumberWindow)
+        labelAccountName = Label(frameName, text = "Nom du compte")
+        entryAccountName = Entry(frameName)
+        labelAccountName.pack(side=LEFT)
+        entryAccountName.pack(side=LEFT)
 
         # Code pour le code
         frameCode = ttk.Frame(self.comfirmNumberWindow)
         label = Label(frameCode, text="Code:")
+
         self.codeEntry = Entry(frameCode, width=50)
         label.pack(side=LEFT)
         self.codeEntry.pack(side=LEFT)
 
         # Code pour le bouton
-        btnComfirm = Button(self.comfirmNumberWindow, text = "Valider le code", command = self.validateCodeAndSaveToPickle)
+        btnComfirm = Button(self.comfirmNumberWindow, text = "Valider le code", command = lambda: self.validateCodeAndSaveToPickle(entryAccountName.get()))
 
         frameUrl.pack()
+        frameName.pack()
         frameCode.pack()
         btnComfirm.pack()
         self.comfirmNumberWindow.mainloop()
 
-    def connexionGoogle(self):
-        self.connectToGoogle()
+    def connexionGoogle(self, name):
+        self.connectToGoogle(name)
         self.window.destroy()
+        self.selectionCompte.destroy()
 
         gui = GUI(self.service)
 
-    def otherAccountConnexionGoogle(self):
-        logging.info("Déconnexion du compte Google enregistré")
-        if(self.hasToken()):
-            os.remove('token.pickle')
-        self.connexionGoogle()
-
     @staticmethod
-    def hasToken():
-        return os.path.exists('token.pickle')
+    def getAllTokens():
+        return [f.split(".pickle")[0] for f in os.listdir("./") if f.endswith(".pickle")]
     
     @staticmethod
-    def deleteToken():
-        return os.remove('token.pickle')
+    def deleteToken(name):
+        if(os.path.exists(name + '.pickle')):
+            os.remove(name + '.pickle')
 
-    def validateCodeAndSaveToPickle(self):
+    def validateCodeAndSaveToPickle(self, name):
+        print("Name: " + name)
         logging.info("Validation du code...")
         code_auth = self.codeEntry.get()
         try:
             creds = self.flow.step2_exchange(code=code_auth)
             # Save the credentials for the next run
-            with open('token.pickle', 'wb') as token:
+            with open(name + '.pickle', 'wb') as token:
                 pickle.dump(creds, token)
 
             self.service = build('calendar', 'v3', credentials=creds)
             self.comfirmNumberWindow.destroy()
             self.window.destroy()
-            g = GUI(self.service)
+            self.createInterface()
         except FlowExchangeError:
             messagebox.showerror("Code invalide", "Le code entrée n'est pas un code valide")
-            logging.warning("Mauvais code de validation!")
+            logging.warning("Mauvais code de validation! (Code = " + code_auth + ")")
 
-    def connectToGoogle(self):
+    def connectToGoogle(self, name):
         logging.info("Connexion au compte google")
         creds = None
-        # The file token.pickle stores the user's access and refresh tokens, and is
-        # created automatically when the authorization flow completes for the first
-        # time.
-        if os.path.exists('token.pickle'):
+        if os.path.exists(name + '.pickle'):
             logging.info('Token de connexion trouvé')
-            with open('token.pickle', 'rb') as token:
+            with open(name + '.pickle', 'rb') as token:
                 creds = pickle.load(token)
             self.service = build('calendar', 'v3', credentials=creds)
-        # If there are no (valid) credentials available, let the user log in.
         else:
-            logging.info("Aucun token de connexion trouvé... Lancement de la procédure de connexion.")
-            self.flow = OAuth2WebServerFlow(CLIENT_ID, CLIENT_SECRET, scope=SCOPES, redirect_uri="urn:ietf:wg:oauth:2.0:oob")
-            flow_info = self.flow.step1_get_authorize_url()
-            self.createComfirmNumberWindow(flow_info)
+            logging.error("Le token '" + name + "' est introuvable...")
 
         
     
