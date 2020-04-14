@@ -59,6 +59,8 @@ class GoogleConnexion:
         btnDisconnectThisPickle = Button(self.selectionCompte, text = "Déconnecter ce compte", command = self.deleteTokenAndRefreshList)
         btnDisconnectThisPickle.pack(expand=True, fill=X)
 
+        btnBack = Button(self.selectionCompte, text = "Retour", command = self.selectionCompte.destroy)
+        btnBack.pack(expand=True, fill=X)
         self.selectionCompte.mainloop()
     
     def deleteTokenAndRefreshList(self):
