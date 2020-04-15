@@ -52,8 +52,9 @@ class GoogleConnexion:
         self.listeCompte = Listbox(self.selectionCompte, selectmode = "single")
         self.listeCompte.insert(0, *GoogleConnexion.getAllTokens())
         self.listeCompte.pack(expand=True, fill=X)
-
-        btnConnectWithThisPickle = Button(self.selectionCompte, text = "Se connecter avec se compte", command = lambda: self.connexionGoogle(self.listeCompte.get(self.listeCompte.curselection())))
+        if(self.listeCompte.curselection()):
+            print("Heya")
+        btnConnectWithThisPickle = Button(self.selectionCompte, text = "Se connecter avec se compte", command = lambda: self.connexionGoogle(self.listeCompte.get(self.listeCompte.curselection())) if self.listeCompte.curselection() else messagebox.showerror("Sélection compte", "Veuillez choisir un compte!"))
         btnConnectWithThisPickle.pack(expand=True, fill=X)
         
         btnDisconnectThisPickle = Button(self.selectionCompte, text = "Déconnecter ce compte", command = self.deleteTokenAndRefreshList)
@@ -64,9 +65,12 @@ class GoogleConnexion:
         self.selectionCompte.mainloop()
     
     def deleteTokenAndRefreshList(self):
-        GoogleConnexion.deleteToken(self.listeCompte.get(self.listeCompte.curselection()))
-        self.listeCompte.delete(0, END)
-        self.listeCompte.insert(0, *GoogleConnexion.getAllTokens())
+        if(self.listeCompte.curselection()):
+            GoogleConnexion.deleteToken(self.listeCompte.get(self.listeCompte.curselection()))
+            self.listeCompte.delete(0, END)
+            self.listeCompte.insert(0, *GoogleConnexion.getAllTokens())
+        else:
+            messagebox.showerror("Sélection compte", "Veuillez choisir un compte!")
 
     def createAddAccountInterface(self):
         self.flow = OAuth2WebServerFlow(CLIENT_ID, CLIENT_SECRET, scope=SCOPES, redirect_uri="urn:ietf:wg:oauth:2.0:oob")
@@ -153,7 +157,7 @@ class GoogleConnexion:
             with open(name + '.pickle', 'wb') as token:
                 pickle.dump(creds, token)
 
-            self.service = build('calendar', 'v3', credentials=creds)
+            # self.service = build('calendar', 'v3', credentials=creds, cache_discovery=False)
             self.comfirmNumberWindow.destroy()
             self.window.destroy()
             self.createInterface()
@@ -168,7 +172,7 @@ class GoogleConnexion:
             logging.info('Token de connexion trouvé')
             with open(name + '.pickle', 'rb') as token:
                 creds = pickle.load(token)
-            self.service = build('calendar', 'v3', credentials=creds)
+            self.service = build('calendar', 'v3', credentials=creds, cache_discovery=False)
         else:
             logging.error("Le token '" + name + "' est introuvable...")
 
