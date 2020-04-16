@@ -52,6 +52,8 @@ class GUI:
                 self.nomEtIdCalendriers[c['summary']] = c['id']
                 logging.info("Ajout de: " + self.nomEtIdCalendriers[c['summary']] + " à la liste des calendriers")
 
+        self.selectedID = listeCalendriers['items'][0]['id']
+        variable.set(listeCalendriers['items'][0]['summary'])
         self.calendarsList = OptionMenu(self.window, variable, *(self.nomEtIdCalendriers.keys()), command = self.setSelectedID)
 
         self.calendarsList.pack(expand=True, fill=X)
