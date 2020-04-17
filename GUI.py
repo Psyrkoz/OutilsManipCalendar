@@ -195,17 +195,24 @@ class GUI:
         self.tabs.event_generate("<<NotebookTabChanged>>") # Génère un event pour redimensionner la tab -> voir fonction resizeTab
 
     def openEvent(self):
+        logging.info("Création de la fenetre de visualisation")
         root = Tk()
         root.title("Événements")
         scrollbar = Scrollbar(root)
         scrollbar.pack( side = RIGHT, fill = Y )
-        listEv = printEvent(self.entryICSFile_Add.get())
+        visu = printEvent(self.entryICSFile_Add.get())
+        listEv = visu['list']
         text = Text(root, yscrollcommand = scrollbar.set )
         for line in listEv:
             text.insert(END, line)
 
         text.pack( side = LEFT, fill = BOTH )
         scrollbar.config( command = text.yview )
+
+        if visu["successful"]:
+            messagebox.showinfo(title="Visualisation", message=visu["message"])
+        else:
+            messagebox.showerror(title="Visualisation", message=visu["message"])
 
     def addICSFileToCalendar(self):
         logging.info("Ajout du fichier ICS '" + self.entryICSFile_Add.get() + "' au calendrier: '" + self.selectedID + "'")

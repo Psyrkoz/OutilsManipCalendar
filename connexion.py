@@ -52,8 +52,7 @@ class GoogleConnexion:
         self.listeCompte = Listbox(self.selectionCompte, selectmode = "single")
         self.listeCompte.insert(0, *GoogleConnexion.getAllTokens())
         self.listeCompte.pack(expand=True, fill=X)
-        if(self.listeCompte.curselection()):
-            print("Heya")
+        
         btnConnectWithThisPickle = Button(self.selectionCompte, text = "Se connecter avec se compte", command = lambda: self.connexionGoogle(self.listeCompte.get(self.listeCompte.curselection())) if self.listeCompte.curselection() else messagebox.showerror("Sélection compte", "Veuillez choisir un compte!"))
         btnConnectWithThisPickle.pack(expand=True, fill=X)
         
