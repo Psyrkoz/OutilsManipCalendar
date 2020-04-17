@@ -66,7 +66,10 @@ def printEvent(filename):
     try:
         g = open(filename,'rb')
         gcal = Calendar.from_ical(g.read())
+        logging.info("Visualisation : Debut de lecture du fichier '" + filename + "'")
         listEv=[]
+        successful = True
+        message = "Visualisation réussite"
         i=0
         nbEvent = 0
         for composant in gcal.walk():
@@ -77,29 +80,46 @@ def printEvent(filename):
             if component.name == "VEVENT":
                 text=""
                 i+=1
-                text+="\nEvènement n°" + str(i) + " :\n"
-                text+="\tRésumé : " + str(component.get('summary'))+"\n"
-                if len(str(component.get('dtstart').dt.isoformat())) == 10:
-                    j = (component.get('dtend').dt - component.get('dtstart').dt).days
-                    text+="\tDurée : " + str(j) + " j\n"
-                    text+="\tDébut : " + component.get('dtstart').dt.strftime("%d/%m/%Y")+"\n"
-                    if j > 1:
-                        text+="\tFin : " + component.get('dtend').dt.strftime("%d/%m/%Y")+"\n"
-                else:
-                    text+="\tDurée : " + deltaBetweenDate(component.get('dtstart').dt.isoformat("T"),component.get('dtend').dt.isoformat("T"))+"\n"
-                    text+="\tDébut : " + component.get('dtstart').dt.strftime("%d/%m/%Y, %H:%M")+"\n"
-                    text+="\tFin : " + component.get('dtend').dt.strftime("%d/%m/%Y, %H:%M")+"\n"
+                try:
+                    if (component.get('dtend').dt >= component.get('dtstart').dt):
+                        text="\nEvènement n°" + str(i) + " :\n"
+                        text+="\tRésumé : " + str(component.get('summary'))+"\n"
+                        if len(str(component.get('dtstart').dt.isoformat())) == 10:
+                            j = (component.get('dtend').dt - component.get('dtstart').dt).days
+                            text+="\tDurée : " + str(j) + " j\n"
+                            text+="\tDébut : " + component.get('dtstart').dt.strftime("%d/%m/%Y")+"\n"
+                            if j > 1:
+                                text+="\tFin : " + (component.get('dtend').dt - timedelta(days=1)).strftime("%d/%m/%Y")+"\n"
+                        else:
+                            text+="\tDurée : " + deltaBetweenDate(component.get('dtstart').dt.isoformat("T"),component.get('dtend').dt.isoformat("T"))+"\n"
+                            text+="\tDébut : " + component.get('dtstart').dt.strftime("%d/%m/%Y, %H:%M")+"\n"
+                            text+="\tFin : " + component.get('dtend').dt.strftime("%d/%m/%Y, %H:%M")+"\n"
+                    else:
+                        logging.error("Erreur de visualisation de l'event n°"+ str(i) + " du fichier '" + filename + "' : Event corrompue : Date de début superieur à date de fin")
+                        text="\nEvènement n°" + str(i) + " :\n"
+                        text+="\tDate de début superieur à date de fin.\n\tL'évènement ne pourra pas ajouté.\n"
+                        successful = False
+                        message = "Une ou plusieurs erreurs de visualisation se sont produites."
+                except Exception as e:
+                    logging.error("Erreur de visualisation de l'event n°"+ str(i) + " du fichier '" + filename + "' : Event corrompue")
+                    text="\nEvènement n°" + str(i) + " :\n"
+                    text+="\tL'évènement est corrompue et ne pourra pas ajouté.\n"
+                    successful = False
+                    message = "Une ou plusieurs erreurs de visualisation se sont produites."
                 listEv.append(text)
         g.close()
-        return listEv
+        logging.info("Visualisation : Fin de lecture du fichier '" + filename + "'")
+        return  {'successful': successful, 'message': message,'list': listEv}
     except FileNotFoundError:
-        logging.error("Impossible d'ouvrir le fichier " + filename)
-        return ""
+        logging.error("Impossible d'ouvrir le fichier '" + filename + "'")
+        listEv = ["Erreur : Impossible d'ouvrir le fichier"]
+        return {'successful': False, 'message': "Impossible d'ouvrir le fichier " ,'list': listEv}
 
 def add(service, calendarID, filename):
     try:    
         g = open(filename,'rb')
         gcal = Calendar.from_ical(g.read())
+        logging.info("Importation : Debut de lecture du fichier '" + filename + "'")
         successful = True
         message = "Importation réussite"
         i=0
@@ -107,27 +127,32 @@ def add(service, calendarID, filename):
             event={}
             if component.name == "VEVENT":
                 i+=1
-                if component.get('summary') is not None:
-                    event['summary']=str(component.get('summary'))
-                if component.get('location') is not None:
-                    event['location']=str(component.get('location'))
-                if component.get('description') is not None:
-                    event['description']=str(component.get('description'))
-                if component.get('sequence') is not None:
-                    event['sequence']=component.get('sequence')
-                if len(str(component.get('dtstart').dt.isoformat())) == 10:
-                    event['start']={'date':str(component.get('dtstart').dt.isoformat())}
-                    event['end']={'date':str(component.get('dtend').dt.isoformat())}
-                else:
-                    event['start']={'dateTime':str(component.get('dtstart').dt.isoformat())}
-                    event['end']={'dateTime':str(component.get('dtend').dt.isoformat())}
-                if component.get('attendee') is not None:
-                    event['attendees']=[]
-                    if isinstance(component.get('attendee'), list):
-                        for a in component.get('attendee'):
-                            event['attendees'].append({'email':str(a).split(":")[1]})
+                try:
+                    if component.get('summary') is not None:
+                        event['summary']=str(component.get('summary'))
+                    if component.get('location') is not None:
+                        event['location']=str(component.get('location'))
+                    if component.get('description') is not None:
+                        event['description']=str(component.get('description'))
+                    if component.get('sequence') is not None:
+                        event['sequence']=component.get('sequence')
+                    if len(str(component.get('dtstart').dt.isoformat())) == 10:
+                        event['start']={'date':str(component.get('dtstart').dt.isoformat())}
+                        event['end']={'date':str(component.get('dtend').dt.isoformat())}
                     else:
-                        event['attendees'].append({'email':str(component.get('attendee')).split(":")[1]})
+                        event['start']={'dateTime':str(component.get('dtstart').dt.isoformat())}
+                        event['end']={'dateTime':str(component.get('dtend').dt.isoformat())}
+                    if component.get('attendee') is not None:
+                        event['attendees']=[]
+                        if isinstance(component.get('attendee'), list):
+                            for a in component.get('attendee'):
+                                event['attendees'].append({'email':str(a).split(":")[1]})
+                        else:
+                            event['attendees'].append({'email':str(component.get('attendee')).split(":")[1]})
+                except:
+                    logging.error("Erreur d'importation de l'event n°"+ str(i) + " du fichier "+ filename +" : Event corrompue")
+                    successful = False
+                    message = "Une erreur est survenu. Visitez les logs"
                 try:
                     event = service.events().insert(calendarId=calendarID, body=event).execute()
                 except Exception as e:
@@ -135,10 +160,11 @@ def add(service, calendarID, filename):
                     successful = False
                     message = "Une erreur est survenu. Visitez les logs"
         g.close()
+        logging.info("Importation : Fin de lecture du fichier '" + filename + "'")
         return {'successful': successful, 'message': message }
     except FileNotFoundError:
-        logging.error("Impossible d'ouvrir le fichier " + filename)
-        return {'successful': False, 'message': "Une erreur est survenu. Visitez les logs" }
+        logging.error("Impossible d'ouvrir le fichier '" + filename + "'")
+        return {'successful': False, 'message': "Impossible d'ouvrir le fichier" }
 
 # date supposed YYYY-MM-DD; return DD/MM/YYYY
 def formatDate(date):
