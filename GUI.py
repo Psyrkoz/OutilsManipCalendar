@@ -2,7 +2,9 @@ from tkinter import Tk, messagebox, IntVar, Checkbutton,Label, Button, Entry, tt
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from DateEntry import DateEntry
 from HeureEntry import HeureEntry
-from manip import export, add, empty, printEvent, getEvent, insertOneEvent
+from manip import export, add, empty, printEvent, getEvent, getEventOnDay, deleteOneEvent, insertOneEvent
+from datetime import datetime
+from functools import partial
 import connexion
 import logging
 import os
@@ -30,6 +32,7 @@ class GUI:
         self.creeTabAjout()
         self.creeTabInsertion()
         self.creeTabExport()
+        self.creeTabSuppression()
         self.creeTabOption()
         self.exitButton = Button(self.window, text = "Quitter l'application", command = self.window.destroy)
         
@@ -65,6 +68,56 @@ class GUI:
         self.selectedID = self.nomEtIdCalendriers[val]
         self.selectedName = val
         #print(val + ": " + self.selectedID)
+
+    def creeTabSuppression(self):
+        logging.info("Création de la tabulation de suppression")
+        self.tabSuppr = ttk.Frame(self.tabs)
+
+        # Date
+        self.lineDateSuppr = ttk.Frame(self.tabSuppr)
+        self.labelDateSuppr = Label(self.lineDateSuppr, text = "Date:")
+        self.dateSuppr = DateEntry(self.lineDateSuppr)
+        self.labelDateSuppr.pack(side=LEFT)
+        self.dateSuppr.pack(side=LEFT)
+
+
+        # Bouton
+        self.btnShowEvent = Button(self.tabSuppr, text = "Afficher évènements", command = self.showEventSuppr)
+        
+        # Liste event
+        self.eventList = ttk.Frame(self.tabSuppr)
+
+        self.lineDateSuppr.pack()
+        self.btnShowEvent.pack(expand=True, fill=X)
+        self.eventList.pack()
+        self.tabs.add(self.tabSuppr, text = "Suppression")
+
+    def showEventSuppr(self):
+        for children in self.eventList.winfo_children():
+            children.destroy()
+
+        date = self.dateSuppr.get()
+        try:
+            date = datetime(day=int(date[0]), month=int(date[1]), year=int(date[2]))
+        except ValueError:
+            logging.error("Date invalide, veuillez vérifier la date entrée")
+            messagebox.showerror("Date invalide", "La date entrée n'est pas valide")
+            return
+
+        evt = getEventOnDay(self.service, self.selectedID, date)        
+        for e in evt:
+            line = ttk.Frame(self.eventList)
+            Label(line, text = evt[e]["summary"] + " - " + evt[e]["heure"]).pack(side=LEFT, expand=True, fill=X)
+            # Partiel empeche l'overwrite avec une lambda normal
+            callback = partial(self.deleteSelectedEvent, e)
+            Button(line, text = "X", command = callback).pack(side=LEFT)
+            line.pack()
+
+        self.tabs.event_generate("<<NotebookTabChanged>>")
+
+    def deleteSelectedEvent(self, eID):
+        deleteOneEvent(self.service, self.selectedID, eID)
+        self.showEventSuppr()
 
     def creeTabExport(self):
         logging.info("Création de la fiche d'exportation")
