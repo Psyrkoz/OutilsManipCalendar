@@ -1,7 +1,8 @@
-from tkinter import Tk, messagebox, Label, Button, Entry, ttk, RIGHT, LEFT, X, Y, BOTTOM, HORIZONTAL, TOP, END, BOTH, OptionMenu, StringVar, Event, Text, Scrollbar, ttk, messagebox
+from tkinter import Tk, messagebox, IntVar, Checkbutton,Label, Button, Entry, ttk, RIGHT, LEFT, X, Y, BOTTOM, HORIZONTAL, TOP, END, BOTH, OptionMenu, StringVar, Event, Text, Scrollbar, ttk, messagebox
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from DateEntry import DateEntry
-from manip import export, add, empty, printEvent, getEvent
+from HeureEntry import HeureEntry
+from manip import export, add, empty, printEvent, getEvent, insertOneEvent
 import connexion
 import logging
 import os
@@ -27,6 +28,7 @@ class GUI:
         self.tabs = ttk.Notebook(self.window)
         self.creeTabView()
         self.creeTabAjout()
+        self.creeTabInsertion()
         self.creeTabExport()
         self.creeTabOption()
         self.exitButton = Button(self.window, text = "Quitter l'application", command = self.window.destroy)
@@ -142,6 +144,95 @@ class GUI:
         self.buttonEventInFile.pack(expand=True, fill=X)
         self.buttonAjouter.pack(expand=True, fill=X)
         self.tabs.add(self.tabAdd, text="Ajout")
+
+    def creeTabInsertion(self):
+        logging.info("Création de la fiche d'insertion d'un évènement")
+        self.tabInsert = ttk.Frame(self.tabs)
+
+
+
+        self.lineDateDebutInsert = ttk.Frame(self.tabInsert)
+        self.dateDebutInsert = Label(self.lineDateDebutInsert, text = "Date début")
+        self.dateDebutInsertEntry = DateEntry(self.lineDateDebutInsert)
+        self.heureDebutInsert = Label(self.lineDateDebutInsert, text = "Heure début")
+        self.heureDebutInsertEntry = HeureEntry(self.lineDateDebutInsert)
+        self.dateDebutInsert.pack(side=LEFT)
+        self.dateDebutInsertEntry.pack(side=LEFT)
+        self.heureDebutInsert.pack(side=LEFT)
+        self.heureDebutInsertEntry.pack(side=LEFT)
+
+        self.lineDateFinInsert = ttk.Frame(self.tabInsert)
+        self.dateFinInsert = Label(self.lineDateFinInsert, text = "Date fin")
+        self.dateFinInsertEntry = DateEntry(self.lineDateFinInsert)
+        self.heureFinInsert = Label(self.lineDateFinInsert, text = "Heure fin")
+        self.heureFinInsertEntry = HeureEntry(self.lineDateFinInsert)
+        self.dateFinInsert.pack(side=LEFT)
+        self.dateFinInsertEntry.pack(side=LEFT)
+        self.heureFinInsert.pack(side=LEFT)
+        self.heureFinInsertEntry.pack(side=LEFT)
+
+        self.lineCheck = ttk.Frame(self.tabInsert)
+        self.varCheckInsert = IntVar()
+        self.checkFullDay = Checkbutton(self.lineCheck, text='Full Day',variable=self.varCheckInsert, onvalue=1, offvalue=0, command=self.onFullDay)
+        self.checkFullDay.pack()
+
+        self.summaryInsert = ttk.Frame(self.tabInsert)
+        self.summaryInsertLabel = Label(self.summaryInsert, text = "Résumé")
+        self.summaryInsertEntry = Entry(self.summaryInsert)
+        self.summaryInsertLabel.pack(side=LEFT)
+        self.summaryInsertEntry.pack(side=LEFT)
+        
+
+        self.descriptionInsert = ttk.Frame(self.tabInsert)
+        self.descriptionInsertLabel = Label(self.descriptionInsert, text = "Description")
+        self.descriptionInsertEntry = Entry(self.descriptionInsert)
+        self.descriptionInsertLabel.pack(side=LEFT)
+        self.descriptionInsertEntry.pack(side=LEFT)
+
+        self.locationInsert = ttk.Frame(self.tabInsert)
+        self.locationInsertLabel = Label(self.locationInsert, text = "Location")
+        self.locationInsertEntry = Entry(self.locationInsert)
+        self.locationInsertLabel.pack(side=LEFT)
+        self.locationInsertEntry.pack(side=LEFT)
+
+        self.buttonInsert = Button(self.tabInsert, text = "Insérez", command = self.onInsertEvent)
+
+        self.lineDateDebutInsert.pack()
+        self.lineDateFinInsert.pack()
+        self.lineCheck.pack()
+        self.summaryInsert.pack()
+        self.descriptionInsert.pack()
+        self.locationInsert.pack()
+        self.buttonInsert.pack(expand=True, fill=X)
+        self.tabs.add(self.tabInsert, text="Insertion")
+
+
+    def onFullDay(self):
+        if (self.varCheckInsert.get() == 1):
+            self.heureDebutInsertEntry.disable()
+            self.heureFinInsertEntry.disable()
+        else:
+            self.heureDebutInsertEntry.enable()
+            self.heureFinInsertEntry.enable()
+        
+    def onInsertEvent(self):
+        dateMin = self.dateDebutInsertEntry.get()
+        dateMax = self.dateFinInsertEntry.get()
+        
+        HeureMin = self.heureDebutInsertEntry.get()
+        HeureMax = self.heureFinInsertEntry.get()
+
+        summ = self.summaryInsertEntry.get()
+        des = self.descriptionInsertEntry.get()
+        loca = self.locationInsertEntry.get()
+
+        if(any(d == '' for d in dateMin) or any(d == '' for d in dateMax) or (self.varCheckInsert.get() == 0 and  (any(d == '' for d in HeureMin) or any(d == '' for d in HeureMax)))):
+            messagebox.showerror(title="Insertion", message="Veuillez remplir les horraires")
+        else:
+            if insertOneEvent(self.service, self.selectedID, (self.varCheckInsert.get() == 1), dateMin, HeureMin, dateMax, HeureMax, summ, des, loca):
+                messagebox.showinfo(title="Insertion", message="L'évènement a été inséré")
+            else:
+                messagebox.showerror(title="Insertion", message="Une erreur est survenu. Visitez les logs")
 
     def creeTabView(self):
         logging.info("Création de la fiche de visualisation des évènements")
