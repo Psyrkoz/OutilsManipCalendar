@@ -115,6 +115,73 @@ def printEvent(filename):
         listEv = ["Erreur : Impossible d'ouvrir le fichier"]
         return {'successful': False, 'message': "Impossible d'ouvrir le fichier " ,'list': listEv}
 
+def insertOneEvent(service, calendarID, fullday, dateMin, HeureMin, dateMax, HeureMax, summ, des, loca):
+    dateStart = None
+    dateEnd = None
+    
+    logging.info("Début de l'insertion de l'event")
+    if fullday:
+        if(dateMin is not None and dateMin[0] != '' and dateMin[1] != '' and dateMin[2] != ''):
+            try:
+                dateStart = datetime(day=int(dateMin[0]), month=int(dateMin[1]), year=int(dateMin[2]))
+            except ValueError:
+                logging.error("Date invalide, veuillez vérifier la date entrée")
+                return False
+        else:
+            logging.error("Date invalide, veuillez vérifier la date entrée")
+            return False
+
+        if(dateMax is not None and dateMax[0] != '' and dateMax[1] != '' and dateMax[2] != ''):
+            try:
+                dateEnd = datetime(day=int(dateMax[0]), month=int(dateMax[1]), year=int(dateMax[2]))
+            except ValueError:
+                logging.error("Date invalide, veuillez vérifier la date entrée")
+                return False
+        else:
+            logging.error("Date invalide, veuillez vérifier la date entrée")
+            return False
+    else:
+        if(dateMin is not None and dateMin[0] != '' and dateMin[1] != '' and dateMin[2] != '' and HeureMin is not None and HeureMin[0] != '' and HeureMin[1] != ''):
+            try:
+                dateStart = datetime(day=int(dateMin[0]), month=int(dateMin[1]), year=int(dateMin[2]), hour=int(HeureMin[0]), minute=int(HeureMin[1]))
+            except ValueError:
+                logging.error("Date invalide, veuillez vérifier la date entrée")
+                return False   
+        else:
+            logging.error("Date invalide, veuillez vérifier la date entrée")
+            return False
+
+        if(dateMax is not None and dateMax[0] != '' and dateMax[1] != '' and dateMax[2] != '' and HeureMax is not None and HeureMax[0] != '' and HeureMax[1] != ''):
+            try:
+                dateEnd = datetime(day=int(dateMax[0]), month=int(dateMax[1]), year=int(dateMax[2]), hour=int(HeureMax[0]), minute=int(HeureMax[1]))
+            except ValueError:
+                logging.error("Date invalide, veuillez vérifier la date entrée")
+                return False
+        else:
+            logging.error("Date invalide, veuillez vérifier la date entrée")
+            return False
+    
+    event={}
+    if (summ is not None and summ != "" ):
+        event['summary']=summ
+    if (loca is not None and loca != "" ):
+        event['location']=loca
+    if (des is not None and des != "" ):
+        event['description']=des
+    if fullday:
+        event['start']={'date':str(dateStart.isoformat()).split("T")[0], "timeZone": "Europe/Paris"}
+        event['end']={'date':str(dateEnd.isoformat()).split("T")[0], "timeZone": "Europe/Paris"}
+    else:
+        event['start']={'dateTime':str(dateStart.isoformat()), "timeZone": "Europe/Paris"}
+        event['end']={'dateTime':str(dateEnd.isoformat()), "timeZone": "Europe/Paris"}
+    try:
+        event = service.events().insert(calendarId=calendarID, body=event).execute()
+    except Exception as e:
+        logging.error("Erreur d'importation d'un event : "+ str(e))
+        return False
+    logging.info("Fin de l'insertion de l'event")
+    return True
+
 def add(service, calendarID, filename):
     try:    
         g = open(filename,'rb')
