@@ -91,20 +91,18 @@ class GUI:
         self.tabs.add(self.tabSuppr, text = "Suppression")
 
     def showEventSuppr(self):
-        # supprime l'ancienne liste d'event
-        self.child = []
         for children in self.eventList.winfo_children():
             children.destroy()
 
         date = self.dateSuppr.get()
         evt = getEventOnDay(self.service, self.selectedID, date)        
         for e in evt:
-            self.child.append(ttk.Frame(self.eventList))
-            Label(self.child[len(self.child) - 1], text = evt[e]["summary"] + " - " + evt[e]["heure"]).pack(side=LEFT, expand=True, fill=X)
+            line = ttk.Frame(self.eventList)
+            Label(line, text = evt[e]["summary"] + " - " + evt[e]["heure"]).pack(side=LEFT, expand=True, fill=X)
             # Partiel empeche l'overwrite avec une lambda normal
             callback = partial(self.deleteSelectedEvent, e)
-            Button(self.child[len(self.child) - 1], text = "X", command = callback).pack(side=LEFT)
-            self.child[len(self.child) - 1].pack()
+            Button(line, text = "X", command = callback).pack(side=LEFT)
+            line.pack()
 
         self.tabs.event_generate("<<NotebookTabChanged>>")
 
