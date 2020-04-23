@@ -299,5 +299,4 @@ def getEventOnDay(service, calendarID, date):
         return
 
 def deleteOneEvent(service, calendarID, eventID):
-    print("evt ID: " + eventID)
     service.events().delete(calendarId=calendarID, eventId=eventID).execute()
