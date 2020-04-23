@@ -268,3 +268,35 @@ def empty(service, calendarID):
     for e in events:
         logging.warning("Suppression de: " + e["id"] + " sur le calendrier " + calendarID)
         service.events().delete(calendarId=calendarID, eventId = e["id"]).execute()
+
+# date: type = array
+def getEventOnDay(service, calendarID, date):
+    try:
+        d = datetime(day=int(date[0]), month=int(date[1]), year=int(date[2]))
+        dateEnd = d + timedelta(days=1)
+
+        d = d.isoformat() + "Z"
+        dateEnd = dateEnd.isoformat() + "Z"
+        events_result = service.events().list(calendarId=calendarID, timeMin=d,
+                                            timeMax=dateEnd, singleEvents=True,
+                                            orderBy='startTime').execute()
+        events = events_result.get('items', [])
+
+        toReturn = dict()
+        for e in events:
+            toReturn[e["id"]] = dict()
+            toReturn[e["id"]]["summary"] = e["summary"]
+            if("date" in e["start"]):
+                toReturn[e["id"]]["heure"] = "Toute la journée"
+            else:
+                heure = e["start"]["dateTime"].split("T")[1].split(":")
+                heure = heure[0] + ":" + heure[1]
+                toReturn[e["id"]]["heure"] = heure
+        
+        return toReturn
+    except ValueError:
+        logging.error("Date invalide, veuillez vérifier la date entrée")
+        return
+
+def deleteOneEvent(service, calendarID, eventID):
+    service.events().delete(calendarId=calendarID, eventId=eventID).execute()
