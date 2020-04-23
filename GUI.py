@@ -95,6 +95,13 @@ class GUI:
             children.destroy()
 
         date = self.dateSuppr.get()
+        try:
+            date = datetime(day=int(date[0]), month=int(date[1]), year=int(date[2]))
+        except ValueError:
+            logging.error("Date invalide, veuillez vérifier la date entrée")
+            messagebox.showerror("Date invalide", "La date entrée n'est pas valide")
+            return
+
         evt = getEventOnDay(self.service, self.selectedID, date)        
         for e in evt:
             line = ttk.Frame(self.eventList)

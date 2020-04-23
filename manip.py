@@ -270,9 +270,8 @@ def empty(service, calendarID):
         service.events().delete(calendarId=calendarID, eventId = e["id"]).execute()
 
 # date: type = array
-def getEventOnDay(service, calendarID, date):
+def getEventOnDay(service, calendarID, d):
     try:
-        d = datetime(day=int(date[0]), month=int(date[1]), year=int(date[2]))
         dateEnd = d + timedelta(days=1)
 
         d = d.isoformat() + "Z"
