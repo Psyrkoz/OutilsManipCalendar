@@ -279,6 +279,25 @@ class GUI:
         des = self.descriptionInsertEntry.get()
         loca = self.locationInsertEntry.get()
 
+        if (self.varCheckInsert.get() == 1):
+            try:
+                dateD = datetime(day=int(dateMin[0]), month=int(dateMin[1]), year=int(dateMin[2]))
+                dateF = datetime(day=int(dateMax[0]), month=int(dateMax[1]), year=int(dateMax[2]))
+            except ValueError:
+                logging.error("Date invalide, veuillez vérifier les date entrée")
+                messagebox.showerror("Date invalide", "Les date entrée ne sont pas valide")
+                return
+        else:
+            try:
+                dateD = datetime(day=int(dateMin[0]), month=int(dateMin[1]), year=int(dateMin[2]), hour=int(HeureMin[0]), minute=int(HeureMin[1]))
+                dateF = datetime(day=int(dateMax[0]), month=int(dateMax[1]), year=int(dateMax[2]), hour=int(HeureMax[0]), minute=int(HeureMax[1]))
+            except ValueError:
+                logging.error("Date invalide, veuillez vérifier les date entrée")
+                messagebox.showerror("Date invalide", "Les date entrée ne sont pas valide")
+                return
+
+        
+
         if(any(d == '' for d in dateMin) or any(d == '' for d in dateMax) or (self.varCheckInsert.get() == 0 and  (any(d == '' for d in HeureMin) or any(d == '' for d in HeureMax)))):
             messagebox.showerror(title="Insertion", message="Veuillez remplir les horraires")
         else:
