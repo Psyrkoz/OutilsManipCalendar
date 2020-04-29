@@ -53,7 +53,7 @@ class GoogleConnexion:
         self.listeCompte.insert(0, *GoogleConnexion.getAllTokens())
         self.listeCompte.pack(expand=True, fill=X)
         
-        btnConnectWithThisPickle = Button(self.selectionCompte, text = "Se connecter avec se compte", command = lambda: self.connexionGoogle(self.listeCompte.get(self.listeCompte.curselection())) if self.listeCompte.curselection() else messagebox.showerror("Sélection compte", "Veuillez choisir un compte!"))
+        btnConnectWithThisPickle = Button(self.selectionCompte, text = "Se connecter avec ce compte", command = lambda: self.connexionGoogle(self.listeCompte.get(self.listeCompte.curselection())) if self.listeCompte.curselection() else messagebox.showerror("Sélection compte", "Veuillez choisir un compte!"))
         btnConnectWithThisPickle.pack(expand=True, fill=X)
         
         btnDisconnectThisPickle = Button(self.selectionCompte, text = "Déconnecter ce compte", command = self.deleteTokenAndRefreshList)
